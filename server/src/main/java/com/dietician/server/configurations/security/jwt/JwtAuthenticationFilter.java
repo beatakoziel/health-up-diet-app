@@ -1,6 +1,6 @@
 package com.dietician.server.configurations.security.jwt;
 
-import com.dietician.server.configurations.MyUserDetailsService;
+import com.dietician.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,15 +19,15 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private UserService userDetailsService;
     @Autowired
     private JwtUtil jwtUtil;
 
     @Override
     public void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String header = servletRequest.getHeader("Authorization");
-        String token= null, username = null;
-        if (header!=null && header.startsWith("Bearer ")) {
+        String token = null, username = null;
+        if (header != null && header.startsWith("Bearer ")) {
             token = header.replace("Bearer ", "");
             username = jwtUtil.extractUsername(token);
 

@@ -1,7 +1,7 @@
 package com.dietician.server.configurations.security;
 
 import com.dietician.server.configurations.security.jwt.JwtAuthenticationFilter;
-import com.dietician.server.configurations.MyUserDetailsService;
+import com.dietician.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private UserService myUserDetailsService;
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;

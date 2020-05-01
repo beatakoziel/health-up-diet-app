@@ -1,9 +1,9 @@
 package com.dietician.server.controllers;
 
-import com.dietician.server.configurations.MyUserDetailsService;
 import com.dietician.server.configurations.security.jwt.JwtUtil;
 import com.dietician.server.dtos.requests.LoginRequest;
 import com.dietician.server.dtos.responses.TokenResponse;
+import com.dietician.server.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private AuthenticationManager authenticationManager;
-    private MyUserDetailsService userDetailService;
+    private UserService userDetailService;
     private JwtUtil jwtTokenUtil;
 
 /*    @GetMapping("/hello1")
