@@ -10,10 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -23,19 +20,12 @@ public class LoginController {
     private UserService userDetailService;
     private JwtUtil jwtTokenUtil;
 
-/*    @GetMapping("/hello1")
-    public String hello1() {
-        return "hello1";
-    }*/
-
-    //@GetMapping("/hello2")
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello2() {
-        return "hello2";
+    @GetMapping("/test")
+    public String test() {
+        return "hello";
     }
 
-    //@PostMapping(value = "/login", consumes = "application/json")
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping(value = "/login", consumes = "application/json")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest user) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -48,6 +38,5 @@ public class LoginController {
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new TokenResponse(jwt));
     }
-
-
+    
 }
