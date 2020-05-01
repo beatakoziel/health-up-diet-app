@@ -1,0 +1,36 @@
+.backgr {
+    background: url('../../resources/img/receipes/receipeback.png') no-repeat center;
+    background-size: cover;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+.h1nap {
+    font-size: 70px;
+    background-color: white;
+    text-align: center;
+}
+.pic{
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.pic:hover
+{
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+.box{
+    position: relative;
+    display: inline-block; /* Make the width of box same as image */
+}
+.box .text{
+    background-color: white;
+    position: absolute;
+    z-index: 999;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 40%; /* Adjust this value to move the positioned div up and down */
+    text-align: center;
+    width: 60%; /* Set the width of the positioned div */
+}

@@ -1,0 +1,7 @@
+.bg {
+    background: url('../../resources/img/backgrounds/mainBackground.jpg') no-repeat center;
+    background-size: cover;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
