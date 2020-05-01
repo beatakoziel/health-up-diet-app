@@ -6,25 +6,20 @@ import com.dietician.server.db.enums.Gender;
 import com.dietician.server.db.enums.Goal;
 import com.dietician.server.db.repositories.UserDataRepository;
 import com.dietician.server.db.repositories.UserRepository;
-import com.dietician.server.utilities.exceptions.UserDataNotFoundException;
 import com.dietician.server.utilities.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserDataService {
 
-    private final UserDataRepository userDataRepository;
-    private final UserRepository userRepository;
-
     private static final int ADDITIONAL_CALORIES_TO_KEEP_WEIGHT = 400;
     private static final int ADDITIONAL_CALORIES_TO_BUILD_MASS = 800;
     private static final int PROTEIN_CALORIES_PER_GRAM = 4;
     private static final int FAT_CALORIES_PER_GRAM = 9;
-
+    private final UserDataRepository userDataRepository;
+    private final UserRepository userRepository;
     private final float[][] activityMatrix = {
             {1.0f, 1.07f, 1.15f, 1.21f},
             {1.06f, 1.15f, 1.23f, 1.29f},

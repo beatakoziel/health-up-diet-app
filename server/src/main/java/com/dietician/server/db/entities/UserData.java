@@ -1,9 +1,9 @@
 package com.dietician.server.db.entities;
 
 import com.dietician.server.db.enums.FreeTimeActivityLevel;
-import com.dietician.server.db.enums.WorkActivityLevel;
 import com.dietician.server.db.enums.Gender;
 import com.dietician.server.db.enums.Goal;
+import com.dietician.server.db.enums.WorkActivityLevel;
 import lombok.*;
 
 import javax.persistence.*;
