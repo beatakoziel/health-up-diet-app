@@ -1,1 +1,1 @@
-replace into health_up_user(id, activated, blocked, email, password, role) values (1, true, false, 'admin@admin.com', 'admin', 'ADMIN');
+replace into health_up_user(id, activated, blocked, email, password, role) values (1, true, false, 'admin@admin.com', '$2y$12$b5LIwLw1C39dptntq1atSu/A2YhCXYWxiPLou/yT5DgKtVaYji3TG', 'ADMIN');
