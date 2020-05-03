@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("users")
 @AllArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;

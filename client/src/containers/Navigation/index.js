@@ -1,7 +1,13 @@
 import React from "react"
 import { Button, Form, Nav, Navbar } from "react-bootstrap"
+import { Link, useHistory } from "react-router-dom"
+import styled from "styled-components"
 
-export const Navigation = () => {
+
+export const Navigation = props => {
+
+  const history = useHistory();
+
   return (
     <Navbar
       className="h-25 border-bottom border-success"
@@ -10,38 +16,42 @@ export const Navigation = () => {
       bg="light"
       variant="light"
     >
-      <Navbar.Brand href="/">
-        <img
-          alt=""
-          src={process.env.PUBLIC_URL + "/assets/img/logo.png"}
-          width="30"
-          height="30"
-        />{" "}
-        HealthUP
+      <Navbar.Brand>
+        <Link to="/">
+          <img
+            alt=""
+            src={process.env.PUBLIC_URL + "/assets/img/logo.png"}
+            width="30"
+            height="30"
+          />{" "}
+          HealthUP
+        </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-nav-bar" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto" defaultActiveKey="/">
-          <Nav.Link href="/przepisy" eventKey="link-1" active>
-            Przepisy
-          </Nav.Link>
-          <Nav.Link href="/produkty" eventKey="link-1" active>
-            Produkty
-          </Nav.Link>
-          <Nav.Link href="/diety" eventKey="link-2" active>
-            Diety
-          </Nav.Link>
-          <Nav.Link href="/kalkulator" eventKey="link-2" active>
-            Kalkulator
-          </Nav.Link>
+          <HLink to="/przepisy">Przepisy</HLink>
+          <HLink to="/produkty">Produkty</HLink>
+          <HLink to="/diety">Diety</HLink>
+          <HLink to="/Kalkulator">Kalkulator</HLink>
         </Nav>
         <Form inline>
-          <Button className="mr-2" variant="outline-success">
+          <Button onClick={()=> history.push('/logowanie')} className="mr-2" variant="outline-success">
             Zaloguj
           </Button>
-          <Button variant="outline-info">Zarejestruj</Button>
+          <Button onClick={()=> history.push('/rejestracja')} variant="outline-info">Zarejestruj</Button>
         </Form>
       </Navbar.Collapse>
     </Navbar>
   )
 }
+
+const HLink = styled(Link)`
+  text-decoration: none;
+  padding: 5px;
+  color: #171616;
+  &:hover {
+    text-decoration: none;
+    color: #666666;
+  }
+`
