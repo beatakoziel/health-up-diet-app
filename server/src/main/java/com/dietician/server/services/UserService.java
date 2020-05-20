@@ -8,7 +8,6 @@ import com.dietician.server.utilities.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,9 +41,14 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) {
         return userRepository.findByEmail(s)
                 .orElseThrow(() -> new UserNotFoundException(s));
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
     }
 
     private User buildFacebookUser(String facebookUserId, String email) {
@@ -55,5 +59,9 @@ public class UserService implements UserDetailsService {
                 .blocked(false)
                 .userGoalDataHistory(new ArrayList<>())
                 .build();
+    }
+
+    public String getUserRole(String username) {
+        return getUserByUsername(username).getRole().toString();
     }
 }
