@@ -1,5 +1,5 @@
-import { Col, FormControl, InputGroup } from "react-bootstrap"
-import React from "react"
+import { Col, FormControl, InputGroup } from 'react-bootstrap';
+import React from 'react';
 
 export const MyInput = ({
   value,
@@ -7,10 +7,10 @@ export const MyInput = ({
   placeholder,
   SpecialIcon,
   updateCredentials,
-  type = "text",
+  type = 'text',
 }) => (
   <Col>
-    <InputGroup className="mb-3">
+    <InputGroup className='mb-3'>
       <InputGroup.Prepend>
         <InputGroup.Text>
           <SpecialIcon />
@@ -25,4 +25,4 @@ export const MyInput = ({
       />
     </InputGroup>
   </Col>
-)
+);

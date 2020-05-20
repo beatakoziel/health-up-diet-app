@@ -1,48 +1,48 @@
-import React, { useEffect, useState } from "react"
-import { Col, Container, Row } from "react-bootstrap"
-import { P } from "../Bmi"
-import { CalculateInput, CalculateOutput, SexCheckbox } from "../Input"
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { P } from '../Bmi';
+import { CalculateInput, CalculateOutput, SexCheckbox } from '../Input';
 
 export const WHR = () => {
-  const [data, setData] = useState({ hips: 0, waist: 0 })
-  const [whr, setWhr] = useState(0)
+  const [data, setData] = useState({ hips: 0, waist: 0 });
+  const [whr, setWhr] = useState(0);
 
-  const setValues = (event) => {
-    setData({ ...data, [event.target.name]: Number(event.target.value) })
-  }
+  const setValues = event => {
+    setData({ ...data, [event.target.name]: Number(event.target.value) });
+  };
 
   useEffect(() => {
     if (data.hips > 0 && data.waist > 0) {
-      setWhr(data.waist / data.hips)
+      setWhr(data.waist / data.hips);
     }
-  }, [data])
+  }, [data]);
 
   return (
-    <Container className="shadow-lg p-3 my-3">
+    <Container className='shadow-lg p-3 my-3'>
       <h1>Kalkulator WHR</h1>
 
       <Row xs={1} md={2}>
-        <Col className="d-flex flex-column justify-content-between">
+        <Col className='d-flex flex-column justify-content-between'>
           <SexCheckbox />
 
           <div>
             <CalculateInput
-              title="Biodra"
-              name="hips"
-              placeholder="Jesteśmy super"
-              unit="cm"
+              title='Biodra'
+              name='hips'
+              placeholder='Jesteśmy super'
+              unit='cm'
               setValues={setValues}
             />
             <CalculateInput
-              title="Talia"
-              name="waist"
-              placeholder="Możemy wszystko"
-              unit="cm"
+              title='Talia'
+              name='waist'
+              placeholder='Możemy wszystko'
+              unit='cm'
               setValues={setValues}
             />
           </div>
 
-          <CalculateOutput value={whr} placeholder="Zachowaj spokój" />
+          <CalculateOutput value={whr} placeholder='Zachowaj spokój' />
         </Col>
         <Col>
           <h3>Dla kobiet</h3>
@@ -60,5 +60,5 @@ export const WHR = () => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};

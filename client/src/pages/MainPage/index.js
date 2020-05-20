@@ -1,8 +1,8 @@
-import * as React from "react"
-import "./MainPage.css"
-import { Header } from "../../components/Header"
-import { Main } from "../../components/Main"
-import { Footer } from "../../components/Footer"
+import * as React from 'react';
+import './MainPage.css';
+import { Header } from '../../components/Home/Header';
+import { Main } from '../../components/Home/Main';
+import { Footer } from '../../components/Home/Footer';
 
 export class MainPage extends React.Component {
   render() {
@@ -12,6 +12,6 @@ export class MainPage extends React.Component {
         <Main />
         <Footer />
       </div>
-    )
+    );
   }
 }

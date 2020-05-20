@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const get = async (url) => {
+export const get = async url => {
   try {
     return (await axios.get(url)).data;
   } catch (e) {
@@ -8,7 +8,7 @@ export const get = async (url) => {
   }
 };
 
-export const getSafe = async (url) => {
+export const getSafe = async url => {
   try {
     const token = localStorage.getItem('@token');
     if (token) {
@@ -63,7 +63,7 @@ export const putSafe = async (url, body) => {
   }
 };
 
-export const deleteSafe = async (url) => {
+export const deleteSafe = async url => {
   try {
     const token = localStorage.getItem('@token');
     if (token) {

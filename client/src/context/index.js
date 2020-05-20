@@ -1,15 +1,15 @@
-import React, { createContext, useReducer } from "react"
-import { reducer } from "./reducer"
+import React, { createContext, useReducer } from 'react';
+import { reducer } from './reducer';
 
 const initData = {
-  token: "",
+  token: '',
   isAuthenticated: false,
-}
+};
 
-export const AuthorizationContext = createContext(initData)
+export const AuthorizationContext = createContext(initData);
 
-export const AuthorizationContextProvider = (props) => {
-  const [authData, dispatch] = useReducer(reducer, initData)
+export const AuthorizationContextProvider = props => {
+  const [authData, dispatch] = useReducer(reducer, initData);
 
   return (
     <AuthorizationContext.Provider
@@ -20,5 +20,5 @@ export const AuthorizationContextProvider = (props) => {
     >
       {props.children}
     </AuthorizationContext.Provider>
-  )
-}
+  );
+};

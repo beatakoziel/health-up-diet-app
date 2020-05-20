@@ -1,7 +1,7 @@
 export const LOGIN_ACTION = "LOGIN"
 export const LOGOUT_ACTION = "LOGOUT"
 
-export const reducer = (action, state) => {
+export const reducer = (state, action ) => {
   switch (action.type) {
     case LOGIN_ACTION:
       localStorage.setItem("@token", state.token)
