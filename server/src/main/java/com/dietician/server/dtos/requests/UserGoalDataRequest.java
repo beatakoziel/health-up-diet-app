@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDataRequest {
+public class UserGoalDataRequest {
     @NotNull
     @Min(value = 0)
     private Float weight;

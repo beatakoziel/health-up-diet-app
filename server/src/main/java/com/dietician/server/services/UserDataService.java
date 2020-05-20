@@ -1,7 +1,7 @@
 package com.dietician.server.services;
 
 import com.dietician.server.db.entities.User;
-import com.dietician.server.db.entities.UserData;
+import com.dietician.server.db.entities.UserGoalData;
 import com.dietician.server.db.enums.Gender;
 import com.dietician.server.db.enums.Goal;
 import com.dietician.server.db.repositories.UserDataRepository;
@@ -28,46 +28,46 @@ public class UserDataService {
             {1.3f, 1.4f, 1.5f, 1.6f}
     };
 
-    public Long addUserData(Long userId, UserData userData) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
-        UserData userDataWithNutrients = getUserDataWithCalculatedNutrients(userData);
-        userDataRepository.save(userDataWithNutrients);
-        user.getUserDataHistory().add(userData);
+    public Long addUserData(String username, UserGoalData userGoalData) {
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
+        UserGoalData userGoalDataWithNutrients = getUserDataWithCalculatedNutrients(userGoalData);
+        userDataRepository.save(userGoalDataWithNutrients);
+        user.getUserGoalDataHistory().add(userGoalData);
         return userRepository.save(user).getId();
     }
 
-    private UserData getUserDataWithCalculatedNutrients(UserData userData) {
-        float activityCoefficient = getActivityCoefficientFromMatrix(userData);
-        int caloriesOnLoseWeight = (int) (userData.getWeight() * 26 * activityCoefficient);
-        int calories = calculateCalories(userData, caloriesOnLoseWeight);
-        userData.setCalories(calories);
+    private UserGoalData getUserDataWithCalculatedNutrients(UserGoalData userGoalData) {
+        float activityCoefficient = getActivityCoefficientFromMatrix(userGoalData);
+        int caloriesOnLoseWeight = (int) (userGoalData.getWeight() * 26 * activityCoefficient);
+        int calories = calculateCalories(userGoalData, caloriesOnLoseWeight);
+        userGoalData.setCalories(calories);
         int fatInGrams = (int) ((0.25 * calories) / 9);
-        int proteinsInGrams = (int) (activityCoefficient * userData.getWeight());
-        if (userData.getGender().equals(Gender.WOMAN))
+        int proteinsInGrams = (int) (activityCoefficient * userGoalData.getWeight());
+        if (userGoalData.getGender().equals(Gender.WOMAN))
             proteinsInGrams *= 1.3;
         else proteinsInGrams *= 1.6;
         int carbohydratesInGrams =
                 (calories - (fatInGrams * FAT_CALORIES_PER_GRAM) - (proteinsInGrams * PROTEIN_CALORIES_PER_GRAM)) / 4;
-        userData.setFat(fatInGrams);
-        userData.setProteins(proteinsInGrams);
-        userData.setCarbohydrates(carbohydratesInGrams);
-        return userData;
+        userGoalData.setFat(fatInGrams);
+        userGoalData.setProteins(proteinsInGrams);
+        userGoalData.setCarbohydrates(carbohydratesInGrams);
+        return userGoalData;
     }
 
-    private int calculateCalories(UserData userData, int caloriesOnLoseWeight) {
+    private int calculateCalories(UserGoalData userGoalData, int caloriesOnLoseWeight) {
         int calories;
-        if (userData.getGender().equals(Gender.WOMAN))
+        if (userGoalData.getGender().equals(Gender.WOMAN))
             caloriesOnLoseWeight *= 0.9;
-        if (userData.getGoal().equals(Goal.LOSE_WEIGHT))
+        if (userGoalData.getGoal().equals(Goal.LOSE_WEIGHT))
             calories = caloriesOnLoseWeight;
-        else if (userData.getGoal().equals(Goal.BUILD_MASS))
+        else if (userGoalData.getGoal().equals(Goal.BUILD_MASS))
             calories = caloriesOnLoseWeight + ADDITIONAL_CALORIES_TO_BUILD_MASS;
         else calories = caloriesOnLoseWeight + ADDITIONAL_CALORIES_TO_KEEP_WEIGHT;
         return calories;
     }
 
-    private float getActivityCoefficientFromMatrix(UserData userData) {
-        return activityMatrix[userData.getFreeTimeActivityLevel().ordinal()][userData.getWorkActivityLevel().ordinal()];
+    private float getActivityCoefficientFromMatrix(UserGoalData userGoalData) {
+        return activityMatrix[userGoalData.getFreeTimeActivityLevel().ordinal()][userGoalData.getWorkActivityLevel().ordinal()];
     }
 }

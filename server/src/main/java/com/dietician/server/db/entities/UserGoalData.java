@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserData {
+public class UserGoalData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

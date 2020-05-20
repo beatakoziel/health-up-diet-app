@@ -1,7 +1,7 @@
 package com.dietician.server.db.repositories;
 
-import com.dietician.server.db.entities.UserData;
+import com.dietician.server.db.entities.UserGoalData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserDataRepository extends JpaRepository<UserData, Long> {
+public interface UserDataRepository extends JpaRepository<UserGoalData, Long> {
 }

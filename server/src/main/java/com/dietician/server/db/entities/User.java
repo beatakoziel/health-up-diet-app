@@ -42,7 +42,7 @@ public class User implements UserDetails {
     private UserRole role;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserData> userDataHistory;
+    private List<UserGoalData> userGoalDataHistory;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

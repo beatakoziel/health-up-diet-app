@@ -36,7 +36,7 @@ public class AuthController {
         return "hello";
     }
 
-    @PostMapping
+    @PostMapping(value = "/signup", consumes = "application/json")
     public ResponseEntity<Void> registerUser(@RequestBody @Valid BasicLoginRequest request) {
         userService.registerUser(userConverter.covertToEntity(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();

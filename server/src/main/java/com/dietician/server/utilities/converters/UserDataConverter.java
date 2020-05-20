@@ -1,7 +1,7 @@
 package com.dietician.server.utilities.converters;
 
-import com.dietician.server.db.entities.UserData;
-import com.dietician.server.dtos.requests.UserDataRequest;
+import com.dietician.server.db.entities.UserGoalData;
+import com.dietician.server.dtos.requests.UserGoalDataRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserDataConverter {
 
-    public UserData convertToEntity(UserDataRequest request) {
-        return UserData.builder()
+    public UserGoalData convertToEntity(UserGoalDataRequest request) {
+        return UserGoalData.builder()
                 .date(new Date())
                 .weight(request.getWeight())
                 .height(request.getHeight())
