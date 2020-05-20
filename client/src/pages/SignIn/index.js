@@ -11,12 +11,12 @@ import { useHistory } from 'react-router-dom';
 import { Facebook } from '../../components/Facebook';
 
 const initialState = {
-  username: '',
+  email: '',
   password: '',
   error: null,
 };
 
-export const SignIn = props => {
+export const SignIn = () => {
   const [credentials, setCredentials] = useState(initialState);
 
   const updateCredentials = e => {
@@ -56,8 +56,8 @@ export const SignIn = props => {
               </InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
-              value={credentials.username}
-              name='username'
+              value={credentials.email}
+              name='email'
               onChange={updateCredentials}
               placeholder='Nazwa użytkownika'
             />
