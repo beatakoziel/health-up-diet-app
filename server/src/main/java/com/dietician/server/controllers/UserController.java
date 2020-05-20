@@ -2,7 +2,7 @@ package com.dietician.server.controllers;
 
 import com.dietician.server.db.entities.UserData;
 import com.dietician.server.dtos.requests.UserDataRequest;
-import com.dietician.server.dtos.requests.UserRequest;
+import com.dietician.server.dtos.requests.BasicLoginRequest;
 import com.dietician.server.dtos.responses.UserResponse;
 import com.dietician.server.services.UserDataService;
 import com.dietician.server.services.UserService;
@@ -27,12 +27,6 @@ public class UserController {
     private final UserConverter userConverter;
     private final UserDataService userDataService;
     private final UserDataConverter userDataConverter;
-
-    @PostMapping
-    public ResponseEntity<Void> registerUser(@RequestBody @Valid UserRequest request) {
-        userService.registerUser(userConverter.covertToEntity(request));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
 
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<UserResponse>> getUsers() {

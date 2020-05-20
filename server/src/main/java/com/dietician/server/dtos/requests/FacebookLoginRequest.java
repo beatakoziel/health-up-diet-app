@@ -13,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
-    @Email(message = "Wrong email format")
+public class FacebookLoginRequest {
+    @Email(message = "Nieprawidłowy format maila")
     @NotNull
     @NotBlank
     private String email;
 
     @NotNull
     @NotBlank
-    private String password;
+    private String userID;
 }

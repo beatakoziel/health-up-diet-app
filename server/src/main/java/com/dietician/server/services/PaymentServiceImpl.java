@@ -1,10 +1,15 @@
 package com.dietician.server.services;
 
+import com.dietician.server.db.entities.User;
+import com.dietician.server.db.enums.UserRole;
+import com.dietician.server.db.repositories.UserRepository;
 import com.dietician.server.dtos.PaymentDto;
+import com.dietician.server.utilities.exceptions.UserNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +18,11 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
+@RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
     private final APIContext apiContext;
-
-    @Autowired
-    public PaymentServiceImpl(APIContext apiContext) {
-        this.apiContext = apiContext;
-    }
+    private final UserRepository userRepository;
 
     @Value("${paypal.client.cancelUrl}")
     private String cancelUrl;
@@ -31,9 +33,6 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public ResponseEntity<String> createPayment(String username, PaymentDto paymentDto) throws JsonProcessingException, PayPalRESTException {
 
-        //CHECK THIS USER BY USERNAME
-        //IF USER HAS SUPER THROW ERROR
-        //ELSE GO ...
         Transaction transaction = createTransaction(username, paymentDto);
 
         Payer payer = new Payer();
@@ -74,14 +73,17 @@ public class PaymentServiceImpl implements PaymentService {
         }
         if (result.getState().equals("approved")) {
             String username = result.getTransactions().get(0).getDescription();
-
-            //FIND USER BY USERNAME
-            //SET USER ROLE AS USER_PREMIUM
-            //SAVE USER
-
+            changeUserRoleForPremium(username);
             return ResponseEntity.ok("Płatność została zrealizowana");
         }
         return ResponseEntity.badRequest().body("Wystąpił bład, spróbuj ponownie później");
+    }
+
+    private void changeUserRoleForPremium(String username) {
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
+        user.setRole(UserRole.USER_PREMIUM);
+        userRepository.save(user);
     }
 
     private Transaction createTransaction(String username, PaymentDto paymentDto) throws JsonProcessingException {

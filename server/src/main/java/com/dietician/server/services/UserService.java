@@ -2,6 +2,7 @@ package com.dietician.server.services;
 
 import com.dietician.server.db.entities.User;
 import com.dietician.server.db.entities.UserData;
+import com.dietician.server.db.enums.UserRole;
 import com.dietician.server.db.repositories.UserRepository;
 import com.dietician.server.utilities.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +22,19 @@ public class UserService implements UserDetailsService {
 
     public Long registerUser(User user) {
         return userRepository.save(user).getId();
+    }
+
+    public void checkFacebookUser(String facebookUserId, String email){
+        if(!userRepository.findByFacebookUserId(facebookUserId).isPresent()){
+            User facebookUser = User.builder()
+                    .email(email)
+                    .facebookUserId(facebookUserId)
+                    .role(UserRole.USER)
+                    .blocked(false)
+                    .userDataHistory(new ArrayList<>())
+                    .build();
+            userRepository.save(facebookUser);
+        }
     }
 
     public List<User> getUsers() {

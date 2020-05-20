@@ -3,7 +3,7 @@ package com.dietician.server.utilities.converters;
 import com.dietician.server.db.entities.User;
 import com.dietician.server.db.enums.UserRole;
 import com.dietician.server.db.repositories.UserRepository;
-import com.dietician.server.dtos.requests.UserRequest;
+import com.dietician.server.dtos.requests.BasicLoginRequest;
 import com.dietician.server.dtos.responses.UserResponse;
 import com.dietician.server.utilities.exceptions.UserAlreadyExistsException;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class UserConverter {
 
     private final UserRepository userRepository;
 
-    public User covertToEntity(UserRequest request) {
+    public User covertToEntity(BasicLoginRequest request) {
         userRepository.findByEmail(request.getEmail())
                 .ifPresent(user -> {
                     throw new UserAlreadyExistsException(request.getEmail());
@@ -26,7 +26,6 @@ public class UserConverter {
         return User.builder()
                 .email(request.getEmail())
                 .password(encoder.encode(request.getPassword()))
-                .activated(false)
                 .blocked(false)
                 .role(UserRole.USER)
                 .build();
@@ -36,7 +35,6 @@ public class UserConverter {
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())
-                .activated(user.isActivated())
                 .blocked(user.isBlocked())
                 .role(user.getRole())
                 .build();
