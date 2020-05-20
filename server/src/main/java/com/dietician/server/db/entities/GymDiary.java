@@ -16,7 +16,7 @@ public class GymDiary {
     private Date date;
 
     @Column(nullable = false)
-    private int weight = 0;
+    private final int weight = 0;
 
     @ManyToOne
     private WorkoutExercise exercise;

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class ProductsQuantitiesInMealRequest {
     @NotNull
-    private int quantity;
+    private final int quantity;
 
-    private Long productId;
+    private final Long productId;
 }

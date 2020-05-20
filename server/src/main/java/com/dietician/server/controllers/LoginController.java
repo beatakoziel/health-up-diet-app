@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class LoginController {
 
-    private AuthenticationManager authenticationManager;
-    private UserService userDetailService;
-    private JwtUtil jwtTokenUtil;
+    private final AuthenticationManager authenticationManager;
+    private final UserService userDetailService;
+    private final JwtUtil jwtTokenUtil;
 
     @GetMapping("/test")
     public String test() {

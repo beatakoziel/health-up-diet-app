@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final Long id;
 
     @Column(nullable = false)
-    private String name;
+    private final String name;
 
     @Column(nullable = false)
-    private int burnedCalories;
+    private final int burnedCalories;
 
     @Column(nullable = false)
-    private ExerciseUnit exerciseUnit;
+    private final ExerciseUnit exerciseUnit;
 }

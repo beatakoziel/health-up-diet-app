@@ -9,11 +9,11 @@ import javax.persistence.*;
 public class ProductsQuantitiesInMeal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final Long id;
 
     @Column(nullable = false)
-    private int quantity;
+    private final int quantity;
 
     @ManyToOne
-    private Product product;
+    private final Product product;
 }

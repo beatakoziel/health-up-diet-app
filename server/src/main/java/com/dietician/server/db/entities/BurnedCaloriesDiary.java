@@ -10,17 +10,17 @@ import java.util.Date;
 public class BurnedCaloriesDiary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final Long id;
 
     @Column(nullable = false)
-    private int quantity;
+    private final int quantity;
 
     @Column(nullable = false)
-    private Date date;
+    private final Date date;
 
     @ManyToOne
-    private Exercise exercise;
+    private final Exercise exercise;
 
     @ManyToOne
-    private User user;
+    private final User user;
 }

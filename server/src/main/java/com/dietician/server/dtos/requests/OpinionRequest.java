@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Builder
 public class OpinionRequest {
-    private String description;
+    private final String description;
 
     @NotNull
-    private Byte rate;
+    private final Byte rate;
 
     @NotNull
-    private Long recipeId;
+    private final Long recipeId;
 
     @NotNull
-    private Long userId;
+    private final Long userId;
 }

@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class RecipeRequest {
     @NotNull
-    private Long mealId;
+    private final Long mealId;
 
     @NotNull
     @NotBlank
     @Max(value = 20000, message = "Description should be less than 20 000")
-    private String description;
+    private final String description;
 }
