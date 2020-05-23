@@ -19,8 +19,11 @@
         "sourceType": "module"
     },
     "plugins": [
+        "prettier/prettier",
         "react"
     ],
     "rules": {
+        "arrow-parens": "off",
+        "no-undef": "off"
     }
 }

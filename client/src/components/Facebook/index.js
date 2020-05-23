@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { Col } from 'react-bootstrap';
+import { postLoginUserByFb } from '../../helpers/apiCommands';
 
 export const Facebook = () => {
-  const [fbCredentials, setFbCredentials] = useState({
-    userID: '',
-    name: '',
-    email: '',
-    picture: '',
-  });
-
-  // const { dispatch } = useContext(AuthorizationContext)
-
   const componentClicked = () => {
     console.log('clicked');
   };
 
-  useEffect(() => {
-    console.log(fbCredentials);
-  }, [fbCredentials]);
-
   const responseFacebook = response => {
-    setFbCredentials({ ...response });
+    postLoginUserByFb({ ...response })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   return (
