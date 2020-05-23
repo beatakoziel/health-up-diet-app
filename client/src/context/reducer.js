@@ -1,15 +1,15 @@
-export const LOGIN_ACTION = "LOGIN"
-export const LOGOUT_ACTION = "LOGOUT"
+import { LOGIN_ACTION, LOGOUT_ACTION } from './types';
+import { INITIAL_AUTH } from './index';
 
-export const reducer = (state, action ) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case LOGIN_ACTION:
-      localStorage.setItem("@token", state.token)
-      return { ...state, isAuthenticated: true, token: action.token }
+      localStorage.setItem('@token', action.user.jwt);
+      return { ...state, isAuthenticated: true, ...action.user };
     case LOGOUT_ACTION:
-      localStorage.clear()
-      return { ...state, isAuthenticated: false, token: "" }
+      localStorage.clear();
+      return INITIAL_AUTH;
     default:
-      return state
+      return state;
   }
-}
+};

@@ -6,9 +6,9 @@ import { MdAccountCircle, MdLock } from 'react-icons/md';
 import { CredentialsWrapper } from '../SignUp';
 import { postLoginUser } from '../../helpers/apiCommands';
 import { AuthorizationContext } from '../../context';
-import { LOGIN_ACTION } from '../../context/reducer';
+import { LOGIN_ACTION } from '../../context/types';
 import { useHistory } from 'react-router-dom';
-import { Facebook } from '../../components/Facebook';
+import { Facebook } from '../../containers/Facebook';
 
 const initialState = {
   email: '',
@@ -29,7 +29,7 @@ export const SignIn = () => {
   const startLogin = async () => {
     try {
       const result = await postLoginUser({ ...credentials });
-      dispatch({ type: LOGIN_ACTION, token: result.data.jwt });
+      dispatch({ type: LOGIN_ACTION, user: { ...result.data } });
       history.push('/');
     } catch (e) {
       console.log(e);

@@ -1,10 +1,17 @@
-import React from 'react';
-import { Button, Form, Nav, Navbar } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Button, Form, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { AuthorizationContext } from '../../context';
+import { LOGOUT_ACTION } from '../../context/types';
+import UserLogo from '../../resources/img/user.png';
 
-export const Navigation = props => {
+const UserImage = <Image src={UserLogo} width='40px' height='40px' />;
+
+export const Navigation = () => {
   const history = useHistory();
+
+  const { authData, dispatch } = useContext(AuthorizationContext);
 
   return (
     <Navbar
@@ -33,21 +40,43 @@ export const Navigation = props => {
           <HLink to='/diety'>Diety</HLink>
           <HLink to='/Kalkulator'>Kalkulator</HLink>
         </Nav>
-        <Form inline>
-          <Button
-            onClick={() => history.push('/logowanie')}
-            className='mr-2'
-            variant='outline-success'
-          >
-            Zaloguj
-          </Button>
-          <Button
-            onClick={() => history.push('/rejestracja')}
-            variant='outline-info'
-          >
-            Zarejestruj
-          </Button>
-        </Form>
+        {!authData.isAuthenticated ? (
+          <Form inline>
+            <Button
+              onClick={() => history.push('/logowanie')}
+              className='mr-2'
+              variant='outline-success'
+            >
+              Zaloguj
+            </Button>
+            <Button
+              onClick={() => history.push('/rejestracja')}
+              variant='outline-info'
+            >
+              Zarejestruj
+            </Button>
+          </Form>
+        ) : (
+          <Nav>
+            <NavDropdown
+              className='btn dropdown'
+              as={Button}
+              title={UserImage}
+              id='dropdown-item-button'
+            >
+              <Vlink to='/profil'>Mój profil</Vlink>
+
+              <NavDropdown.Divider />
+              <NavDropdown.Item
+                onClick={() => {
+                  dispatch({ type: LOGOUT_ACTION });
+                }}
+              >
+                Wyloguj się
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
@@ -57,6 +86,17 @@ const HLink = styled(Link)`
   text-decoration: none;
   padding: 5px;
   color: #171616;
+  &:hover {
+    text-decoration: none;
+    color: #666666;
+  }
+`;
+
+const Vlink = styled(Link)`
+  text-decoration: none;
+  display: block;
+  padding: 4px 24px;
+  color: #212429;
   &:hover {
     text-decoration: none;
     color: #666666;

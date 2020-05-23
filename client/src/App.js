@@ -11,6 +11,7 @@ import { Products } from './pages/Products';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { AuthorizationContextProvider } from './context';
+import { UserProfile } from './pages/UserProfile';
 
 class App extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route exact path='/przepisy' component={Receipes} />
             <Route exact path='/przepisy/:id' component={ChosenReceipe} />
             <Route exact path='/produkty' component={Products} />
+            <Route exact path='/profil' component={UserProfile} />
           </Switch>
         </Router>
       </AuthorizationContextProvider>

@@ -1,15 +1,20 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import { reducer } from './reducer';
 
-const initData = {
-  token: '',
+export const INITIAL_AUTH = {
+  jwt: '',
   isAuthenticated: false,
+  userRole: '',
 };
 
-export const AuthorizationContext = createContext(initData);
+export const AuthorizationContext = createContext(INITIAL_AUTH);
 
 export const AuthorizationContextProvider = props => {
-  const [authData, dispatch] = useReducer(reducer, initData);
+  const [authData, dispatch] = useReducer(reducer, INITIAL_AUTH);
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <AuthorizationContext.Provider
