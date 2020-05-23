@@ -13,7 +13,5 @@ public class UserResponse {
 
     private boolean blocked;
 
-    private boolean activated;
-
     private UserRole role;
 }

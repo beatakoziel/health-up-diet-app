@@ -33,7 +33,7 @@ public class UserDataService {
                 .orElseThrow(() -> new UserNotFoundException(username));
         UserGoalData userGoalDataWithNutrients = getUserDataWithCalculatedNutrients(userGoalData);
         userDataRepository.save(userGoalDataWithNutrients);
-        user.getUserGoalDataHistory().add(userGoalData);
+        user.setUserGoal(userGoalData);
         return userRepository.save(user).getId();
     }
 

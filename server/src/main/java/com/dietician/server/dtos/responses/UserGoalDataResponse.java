@@ -1,40 +1,29 @@
-package com.dietician.server.dtos.requests;
+package com.dietician.server.dtos.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
 
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserGoalDataRequest {
-    @NotNull
-    @Min(value = 0)
+public class UserGoalDataResponse {
     private Float weight;
-
-    @NotNull
-    @Min(value = 0)
     private Float height;
-
-    @NotNull
-    @Max(value = 120)
     private Byte age;
-
-    @NotNull
+    private int calories;
+    private int carbohydrates;
+    private int proteins;
+    private int fat;
     private String goal;
-
-    @NotNull
     private String gender;
-
-    @NotNull
     private String workActivityLevel;
-
-    @NotNull
     private String freeTimeActivityLevel;
+    private boolean dataCompleted;
 }

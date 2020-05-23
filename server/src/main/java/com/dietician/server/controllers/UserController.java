@@ -1,8 +1,8 @@
 package com.dietician.server.controllers;
 
 import com.dietician.server.db.entities.User;
-import com.dietician.server.db.entities.UserGoalData;
 import com.dietician.server.dtos.requests.UserGoalDataRequest;
+import com.dietician.server.dtos.responses.UserGoalDataResponse;
 import com.dietician.server.dtos.responses.UserResponse;
 import com.dietician.server.services.UserDataService;
 import com.dietician.server.services.UserService;
@@ -55,8 +55,8 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public ResponseEntity<List<UserGoalData>> getUserData(Authentication authentication) {
-        return ResponseEntity.ok(userService.getUserGoalDataListByUsername(getUsernameFromAuthentication(authentication)));
+    public ResponseEntity<UserGoalDataResponse> getUserData(Authentication authentication) {
+        return ResponseEntity.ok(userService.getUserGoalData(getUsernameFromAuthentication(authentication)));
     }
 
     private String getUsernameFromAuthentication(Authentication authentication) {

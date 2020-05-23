@@ -19,8 +19,5 @@ public class BurnedCaloriesDiary {
     private final Date date;
 
     @ManyToOne
-    private final Exercise exercise;
-
-    @ManyToOne
     private final User user;
 }
