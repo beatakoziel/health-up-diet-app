@@ -42,10 +42,10 @@ public class UserController {
                         .collect(Collectors.toList()));
     }
 
-    @PostMapping("/role")
+    @GetMapping("/role")
     public ResponseEntity<String> getUserRole(Authentication authentication) {
-        userService.getUserRole(getUsernameFromAuthentication(authentication));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        String token = userService.getUserRole(getUsernameFromAuthentication(authentication));
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/data")

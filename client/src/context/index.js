@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import { reducer } from './reducer';
+import { getAndCheckUserRole } from '../helpers/apiCommands';
+import { LOGIN_ACTION } from './types';
 
 export const INITIAL_AUTH = {
   jwt: '',
@@ -13,7 +15,15 @@ export const AuthorizationContextProvider = props => {
   const [authData, dispatch] = useReducer(reducer, INITIAL_AUTH);
 
   useEffect(() => {
-
+    getAndCheckUserRole()
+      .then(res => {
+        const user = {};
+        user.userRole = res.data;
+        user.isAuthenticated = true;
+        user.jwt = localStorage.getItem('@token');
+        dispatch({ type: LOGIN_ACTION, user });
+      })
+      .catch(err => console.log(err));
   }, []);
 
   return (
