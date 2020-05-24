@@ -1,7 +1,6 @@
 package com.dietician.server.db.enums;
 
 import com.dietician.server.utilities.exceptions.ActivityLevelNotFoundException;
-import com.dietician.server.utilities.exceptions.GoalNotFoundException;
 import lombok.Getter;
 
 import java.util.Arrays;

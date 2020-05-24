@@ -44,8 +44,8 @@ public class UserController {
 
     @GetMapping("/role")
     public ResponseEntity<String> getUserRole(Authentication authentication) {
-        String token = userService.getUserRole(getUsernameFromAuthentication(authentication));
-        return ResponseEntity.ok(token);
+        String userRole = userService.getUserRole(getUsernameFromAuthentication(authentication));
+        return ResponseEntity.ok(userRole);
     }
 
     @PostMapping("/data")

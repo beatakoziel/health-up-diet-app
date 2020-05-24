@@ -35,5 +35,5 @@ public class NutrientsPerPortionRequest {
     private Integer proteins;
 
     @NotNull
-    private PortionUnit unit;
+    private String unit;
 }

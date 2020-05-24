@@ -1,6 +1,6 @@
 package com.dietician.server.controllers;
 
-import com.dietician.server.db.enums.Goal;
+import com.dietician.server.dtos.responses.AddProductFrontInfo;
 import com.dietician.server.dtos.responses.UserGoalFrontInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ public class InfoController {
         return ResponseEntity.ok(new UserGoalFrontInfo());
     }
 
-    @GetMapping("/go")
-    public ResponseEntity<Goal> getGoal() {
-        return ResponseEntity.ok(Goal.getByLabel("Utrzymanie"));
+    @GetMapping
+    public ResponseEntity<AddProductFrontInfo> getAddProductInfo() {
+        return ResponseEntity.ok(new AddProductFrontInfo());
     }
 }

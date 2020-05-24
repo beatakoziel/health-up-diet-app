@@ -21,7 +21,7 @@ public class ProductRequest {
     private String name;
 
     @NotNull
-    private Category category;
+    private String category;
 
     @NotNull
     private NutrientsPerPortionRequest nutrientsPerPortion;
