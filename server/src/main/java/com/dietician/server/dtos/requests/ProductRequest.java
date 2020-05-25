@@ -1,6 +1,5 @@
 package com.dietician.server.dtos.requests;
 
-import com.dietician.server.db.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

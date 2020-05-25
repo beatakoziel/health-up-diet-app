@@ -7,6 +7,8 @@ import com.dietician.server.db.enums.PortionUnit;
 import com.dietician.server.db.repositories.NutrientsPerPortionRepository;
 import com.dietician.server.dtos.requests.NutrientsPerPortionRequest;
 import com.dietician.server.dtos.requests.ProductRequest;
+import com.dietician.server.dtos.responses.NutrientsPerPortionResponse;
+import com.dietician.server.dtos.responses.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,24 @@ public class ProductConverter {
                 .name(request.getName())
                 .category(Category.getByLabel(request.getCategory()))
                 .standardPortionNutrients(nutrients)
+                .build();
+    }
+
+    public ProductResponse convertToResponse(Product product) {
+        NutrientsPerPortion nutrients = product.getStandardPortionNutrients();
+        NutrientsPerPortionResponse nutrientsResponse = NutrientsPerPortionResponse.builder()
+                .portionSize(nutrients.getPortionSize())
+                .calories(nutrients.getCalories())
+                .carbohydrates(nutrients.getCarbohydrates())
+                .proteins(nutrients.getProteins())
+                .fat(nutrients.getFat())
+                .unit(nutrients.getUnit().getLabel())
+                .build();
+
+        return ProductResponse.builder()
+                .name(product.getName())
+                .category(product.getCategory().getLabel())
+                .nutrientsPerPortion(nutrientsResponse)
                 .build();
     }
 
