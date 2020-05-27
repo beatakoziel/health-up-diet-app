@@ -8,17 +8,18 @@ export class UserForm extends React.Component {
         goalsList: [],
         gendersList: [],
         freeTimeActivityLevelList: [],
-        weight: 0,
-        height: 0,
-        age: 0,
-        calories: 0,
-        carbohydrates: 0,
-        proteins: 0,
-        fat: 0,
-        goal: '',
-        gender: '',
-        workActivityLevel: '',
-        freeTimeActivityLevel: '',
+        weight: '',
+        height: '',
+        age: '',
+        calories: '',
+        carbohydrates: '',
+        proteins: '',
+        fat: '',
+        goal: 'Redukowanie',
+        gender: 'Mężczyzna',
+        workActivityLevel: 'Bardzo niski',
+        freeTimeActivityLevel: 'Bardzo niski',
+        dataCompleted: true
     };
 
     componentDidMount = async () => {
@@ -42,14 +43,14 @@ export class UserForm extends React.Component {
     };
 
     sendUserForm = async () => {
-        const { weight, age, calories, carbohydrates, fat, gender, goal, height, proteins, workActivityLevel, freeTimeActivityLevel } = this.state;
+        const { weight, age, calories, carbohydrates, fat, gender, goal, height, proteins, workActivityLevel, freeTimeActivityLevel, dataCompleted } = this.state;
         const bodyposts = {
-            age: age,
+            age: parseInt(age),
             freeTimeActivityLevel: freeTimeActivityLevel,
             gender: gender,
             goal: goal,
-            height: height,
-            weight: weight,
+            height: parseInt(height),
+            weight: parseInt(weight),
             workActivityLevel: workActivityLevel
         };
         if (
@@ -64,14 +65,16 @@ export class UserForm extends React.Component {
             proteins.length > 0 &&
             workActivityLevel.length > 0 &&
             freeTimeActivityLevel.length > 0
-        )
-        {
-            try{
-                console.log({age,freeTimeActivityLevel,gender,goal,height,weight,workActivityLevel});
-                await postGoals({age,freeTimeActivityLevel,gender,goal,height,weight,workActivityLevel});
-            }catch (e) {
+        ) {
+            try {
+                console.log(bodyposts);
+                await postGoals(bodyposts);
+            } catch (e) {
                 console.log(e);
             }
+        }
+        else {
+            alert("brakuje danych");
         }
     };
 
@@ -84,7 +87,7 @@ export class UserForm extends React.Component {
                 <h1 className={"text-center"}>Proszę wypełnić formularz</h1>
 
                     <Form className='ml-4'>
-                        <Form.Group controlId='exampleForm.ControlTextarea1'>
+                        <Form.Group>
                             <Form.Label>Waga</Form.Label>
                             <Form.Control
                                 type='text'
