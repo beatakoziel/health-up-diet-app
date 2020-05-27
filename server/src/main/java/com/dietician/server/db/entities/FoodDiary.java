@@ -1,17 +1,31 @@
 package com.dietician.server.db.entities;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.time.OffsetDateTime;
 import java.util.Date;
-import java.util.List;
 
 @Entity
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FoodDiary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Date date;
+    private OffsetDateTime date;
 
     private int waterGlasses;
 
@@ -19,11 +33,8 @@ public class FoodDiary {
     private User user;
 
     @ManyToOne
-    private Meal meal;
-
-    @ManyToOne
     private Product product;
 
-    @ManyToMany
-    private List<ProductsQuantitiesInMeal> productsQuantitiesInMeals;
+    @ManyToOne
+    private NutrientsPerPortion nutrientsPerPortion;
 }

@@ -1,7 +1,9 @@
 package com.dietician.server.controllers;
 
 import com.dietician.server.db.entities.User;
+import com.dietician.server.dtos.requests.ProductToCaloriesRequest;
 import com.dietician.server.dtos.requests.UserGoalDataRequest;
+import com.dietician.server.dtos.responses.UserDailyCaloriesSumResponse;
 import com.dietician.server.dtos.responses.UserGoalDataResponse;
 import com.dietician.server.dtos.responses.UserResponse;
 import com.dietician.server.services.UserDataService;
@@ -57,6 +59,18 @@ public class UserController {
     @GetMapping("/data")
     public ResponseEntity<UserGoalDataResponse> getUserData(Authentication authentication) {
         return ResponseEntity.ok(userService.getUserGoalData(getUsernameFromAuthentication(authentication)));
+    }
+
+    @GetMapping("/daily-calories")
+    public ResponseEntity<UserDailyCaloriesSumResponse> getUserDailyCalories(Authentication authentication) {
+        return ResponseEntity.ok(userService.getDailyCaloriesSum(getUsernameFromAuthentication(authentication)));
+    }
+
+    @PostMapping("/calories")
+    public ResponseEntity<Void> addProductToUserDailyCalories(Authentication authentication, @RequestBody @Valid ProductToCaloriesRequest request) {
+        userService.addProductToUserDailyCalories(getUsernameFromAuthentication(authentication),
+                request.getProductId(), request.getQuantity());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     private String getUsernameFromAuthentication(Authentication authentication) {

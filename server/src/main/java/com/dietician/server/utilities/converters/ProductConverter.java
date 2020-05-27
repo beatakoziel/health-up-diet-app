@@ -56,6 +56,7 @@ public class ProductConverter {
                 .build();
 
         return ProductResponse.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .category(product.getCategory().getLabel())
                 .nutrientsPerPortion(nutrientsResponse)
