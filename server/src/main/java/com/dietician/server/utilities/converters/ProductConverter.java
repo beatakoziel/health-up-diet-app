@@ -45,7 +45,9 @@ public class ProductConverter {
     }
 
     public ProductResponse convertToResponse(Product product) {
+        System.out.println(product.getStandardPortionNutrients().getPortionSize());
         NutrientsPerPortion nutrients = product.getStandardPortionNutrients();
+        System.out.println(nutrients.getPortionSize());
         NutrientsPerPortionResponse nutrientsResponse = NutrientsPerPortionResponse.builder()
                 .portionSize(nutrients.getPortionSize())
                 .calories(nutrients.getCalories())
@@ -54,7 +56,7 @@ public class ProductConverter {
                 .fat(nutrients.getFat())
                 .unit(nutrients.getUnit().getLabel())
                 .build();
-
+        System.out.println(nutrientsResponse.getPortionSize());
         return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())

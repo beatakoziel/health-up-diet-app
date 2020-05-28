@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class NutrientsPerPortionRequest {
     @NotNull
-    @Min(value = 0, message = "Portion size shouldn't be less than 0")
+    @Min(value = 1, message = "Portion size shouldn't be less than 0")
     private Integer portionSize;
 
     @NotNull
