@@ -21,7 +21,7 @@ public class ProductConverter {
     public Product convertToEntity(ProductRequest request) {
         NutrientsPerPortionRequest nutrientsRequest = request.getNutrientsPerPortion();
         NutrientsPerPortion nutrients = NutrientsPerPortion.builder()
-                .portionSize(nutrientsRequest.getPortionSize())
+                .portionSize(100)
                 .calories(calculatePerOneHundredGrams(
                         nutrientsRequest.getPortionSize(),
                         nutrientsRequest.getCalories()))
@@ -36,7 +36,6 @@ public class ProductConverter {
                         nutrientsRequest.getFat()))
                 .unit(PortionUnit.getByLabel(nutrientsRequest.getUnit()))
                 .build();
-
         return Product.builder()
                 .name(request.getName())
                 .category(Category.getByLabel(request.getCategory()))
@@ -45,9 +44,7 @@ public class ProductConverter {
     }
 
     public ProductResponse convertToResponse(Product product) {
-        System.out.println(product.getStandardPortionNutrients().getPortionSize());
         NutrientsPerPortion nutrients = product.getStandardPortionNutrients();
-        System.out.println(nutrients.getPortionSize());
         NutrientsPerPortionResponse nutrientsResponse = NutrientsPerPortionResponse.builder()
                 .portionSize(nutrients.getPortionSize())
                 .calories(nutrients.getCalories())
@@ -56,7 +53,6 @@ public class ProductConverter {
                 .fat(nutrients.getFat())
                 .unit(nutrients.getUnit().getLabel())
                 .build();
-        System.out.println(nutrientsResponse.getPortionSize());
         return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())

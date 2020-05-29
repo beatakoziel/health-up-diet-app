@@ -22,6 +22,7 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private Category category;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

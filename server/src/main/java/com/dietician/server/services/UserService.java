@@ -1,10 +1,6 @@
 package com.dietician.server.services;
 
-import com.dietician.server.db.entities.FoodDiary;
-import com.dietician.server.db.entities.NutrientsPerPortion;
-import com.dietician.server.db.entities.Product;
-import com.dietician.server.db.entities.User;
-import com.dietician.server.db.entities.UserGoalData;
+import com.dietician.server.db.entities.*;
 import com.dietician.server.db.enums.PortionUnit;
 import com.dietician.server.db.enums.UserRole;
 import com.dietician.server.db.repositories.FoodDiaryRepository;
@@ -146,6 +142,7 @@ public class UserService implements UserDetailsService {
                 .proteins(lastfoodDiary.getProteins() - ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize()))
                 .fat(lastfoodDiary.getFat() - ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize()))
                 .carbohydrates(lastfoodDiary.getCarbohydrates() - ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize()))
+                .unit(lastfoodDiary.getUnit())
                 .build();
         nutrientsPerPortionRepository.save(foodDiaryPositionNutrients);
         FoodDiary foodDiary = FoodDiary.builder()

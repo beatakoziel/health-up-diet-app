@@ -29,7 +29,7 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         return productRepository.findAll().stream()
-                .peek(product -> System.out.println("elo"+product.getStandardPortionNutrients().getPortionSize()))
+                .peek(product -> System.out.println("elo" + product.getStandardPortionNutrients().getPortionSize()))
                 .collect(Collectors.toList());
     }
 }

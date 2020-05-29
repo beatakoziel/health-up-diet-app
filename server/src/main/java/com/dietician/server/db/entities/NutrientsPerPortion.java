@@ -34,5 +34,6 @@ public class NutrientsPerPortion {
     private int fat;
 
     @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private PortionUnit unit;
 }
