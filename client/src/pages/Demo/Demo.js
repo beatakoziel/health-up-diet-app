@@ -4,6 +4,7 @@ import { ProgressCircle } from '../../components/progress-circle/ProgressCircle'
 import { Color } from '../../helpers/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import {getUserDailyCalories, getUserData} from "../../helpers/apiCommands";
+import {ProductAdd} from "../../components/product-add";
 
 export const DemoPage = () => {
 
@@ -73,7 +74,7 @@ export const DemoPage = () => {
         <h1>Twoje dzienne zapotrzebowanie</h1><br/>
           <ProgressCircle
               name='Kalorie'
-              actual={97.12}
+              actual={dailyNutrients.calories}
               dailyNutrients={userData.calories}
               color={Color.blue}
           />
@@ -81,7 +82,7 @@ export const DemoPage = () => {
         <div>
             <ProgressCircle
                 name='Węglowodany'
-                actual={97.12}
+                actual={dailyNutrients.carbohydrates}
                 dailyNutrients={userData.carbohydrates}
                 color={Color.red}
             />
@@ -89,7 +90,7 @@ export const DemoPage = () => {
         <div>
             <ProgressCircle
                 name='Tłuszcze'
-                actual={1}
+                actual={dailyNutrients.fat}
                 dailyNutrients={userData.fat}
                 color={Color.gold}
             />
@@ -97,7 +98,7 @@ export const DemoPage = () => {
         <div>
             <ProgressCircle
                 name='Białka'
-                actual={97.12}
+                actual={dailyNutrients.proteins}
                 dailyNutrients={userData.proteins}
                 color={Color.orange}
             />
@@ -106,6 +107,9 @@ export const DemoPage = () => {
         <h1>Produkty</h1>
         <ProductTable />
       </div>
+        <div>
+            <ProductAdd/>
+        </div>
     </Container>
   );
 };

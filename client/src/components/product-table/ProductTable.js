@@ -1,40 +1,38 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { ProductTableRow } from '../product-table-row/ProductTableRow';
-import {getAllProducts} from "../../helpers/apiCommands";
+import {addProduct, getAllProducts} from "../../helpers/apiCommands";
+import {Container, Col} from "react-bootstrap";
 
 export const ProductTable = () => {
 
-    const [products, setProducts] = useState([{
-        category: '',
-        id: 0,
-        name: '',
-        nutrientsPerPortion: {
-            calories: 0,
-            carbohydrates: 0,
-            fat: 0,
-            portionSize: 0,
-            proteins: 0,
-            unit: ''
-        }
-    }]);
-
+    const [products, setProducts] = useState([]);
     useEffect(() => {
         getAllProducts()
             .then((res) => {
-                setProducts({
-                    products: res.data
-                })
+                setProducts(res.data);
+
             })
             .catch((err) => {
                 console.log(err);
             });
-    });
+    },[]);
+
 
   return (
-    <div className='row d-flex flex-column'>
-      <ProductTableRow name='jabłko' unit='g' />
-    </div>
+      <Container className='shadow p-2'>
+          <Col>
+              {products.length>0 &&
+              products.map((product,id) => (
+                  <ProductTableRow
+                      key={id}
+                      productId={product.id}
+                      name={product.name}
+                      unit={product.nutrientsPerPortion.unit}
+                  />
+              ))}
+          </Col>
+      </Container>
   );
 };
 
