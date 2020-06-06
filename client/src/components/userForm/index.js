@@ -11,10 +11,6 @@ export class UserForm extends React.Component {
         weight: '',
         height: '',
         age: '',
-        calories: '',
-        carbohydrates: '',
-        proteins: '',
-        fat: '',
         goal: 'Redukowanie',
         gender: 'Mężczyzna',
         workActivityLevel: 'Bardzo niski',
@@ -56,13 +52,9 @@ export class UserForm extends React.Component {
         if (
             weight.length > 0 &&
             age.length > 0 &&
-            calories.length > 0 &&
-            carbohydrates.length > 0 &&
-            fat.length > 0 &&
             gender.length > 0 &&
             goal.length > 0 &&
             height.length > 0 &&
-            proteins.length > 0 &&
             workActivityLevel.length > 0 &&
             freeTimeActivityLevel.length > 0
         ) {
@@ -79,7 +71,7 @@ export class UserForm extends React.Component {
     };
 
     render() {
-        const { workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, proteins, height, goal, gender, fat, carbohydrates, calories, age, weight } = this.state;
+        const { workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, height, goal, gender, age, weight } = this.state;
 
         return (
             <Col className={"border border-success"}>
@@ -109,38 +101,6 @@ export class UserForm extends React.Component {
                                 type='text'
                                 value={age}
                                 name='age'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio kalorie w ciągu dnia</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={calories}
-                                name='calories'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio węglowodany (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={carbohydrates}
-                                name='carbohydrates'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio białka (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={proteins}
-                                name='proteins'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio tłuszcze (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={fat}
-                                name='fat'
                                 onChange={this.updateCredentials}
                                 placeholder=''
                             />

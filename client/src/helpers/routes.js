@@ -11,3 +11,9 @@ export const loginApiUrlByFb = () => `${serverUrl}/login/fb`;
 
 export const getGoalsApiUrl = () => `${serverUrl}/info/goal`;
 export const postGoalsApiUrl = () => `${serverUrl}/users/data`;
+export const getUserDataApiUrl = () => `${serverUrl}/users/data`;
+export const getUserDailyCaloriesApiUrl = () => `${serverUrl}/users/daily-calories`;
+export const postProductToUserDailyCaloriesApiUrl = () => `${serverUrl}/users/calories`;
+
+export const getAllProductsApiUrl = () => `${serverUrl}/products`;
+export const postProductApiUrl = () => `${serverUrl}/products`;
