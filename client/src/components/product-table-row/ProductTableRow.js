@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { PlusOutlined } from '@ant-design/icons';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import {addProductToUserDailyCalories} from "../../helpers/apiCommands";
 
 export const ProductTableRow = props => {
   const [quantity, setQuantity] = useState('');
-  const { productId, name, unit } = props;
+  const { productId, name, unit, category } = props;
 
   const onChange = event => {
     setQuantity(event.target.value);
@@ -31,6 +30,7 @@ export const ProductTableRow = props => {
     addProductToUserDailyCalories(postToApi)
         .then((res) => {
           console.log("ok");
+          window.location.reload();
 
         })
         .catch((err) => {

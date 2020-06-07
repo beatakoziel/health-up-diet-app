@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import { ProductTableRow } from '../product-table-row/ProductTableRow';
-import {addProduct, getAllProducts} from "../../helpers/apiCommands";
+import {getAllProducts} from "../../helpers/apiCommands";
 import {Container, Col} from "react-bootstrap";
 
 export const ProductTable = () => {
@@ -29,6 +28,12 @@ export const ProductTable = () => {
                       productId={product.id}
                       name={product.name}
                       unit={product.nutrientsPerPortion.unit}
+                      category={product.category}
+                      calories={product.nutrientsPerPortion.calories}
+                      carbohydrates={product.nutrientsPerPortion.carbohydrates}
+                      fat={product.nutrientsPerPortion.fat}
+                      portionSize={product.nutrientsPerPortion.portionSize}
+                      proteins={product.nutrientsPerPortion.proteins}
                   />
               ))}
           </Col>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import {getGoals, postGoals} from "../../helpers/apiCommands";
 
 export class UserForm extends React.Component {
@@ -74,7 +74,7 @@ export class UserForm extends React.Component {
         const { workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, height, goal, gender, age, weight } = this.state;
 
         return (
-            <Col className={"border border-success"}>
+            <Col>
 
                 <h1 className={"text-center"}>Proszę wypełnić formularz</h1>
 

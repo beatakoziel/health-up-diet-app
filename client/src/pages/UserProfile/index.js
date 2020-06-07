@@ -1,111 +1,28 @@
-import React, {useState, useEffect} from 'react';
-import { Container, Row } from 'react-bootstrap';
-import { LabelData } from '../../components/userProfile/labelData';
+import React from 'react';
+import { Container, Accordion, Card, Button } from 'react-bootstrap';
 import {UserForm} from "../../components/userForm";
-import {ProgressCircle} from "../../components/progress-circle/ProgressCircle";
-import {Color} from "../../helpers/enums/Colors";
-import {getUserDailyCalories, getUserData} from "../../helpers/apiCommands";
+import {DailyDemand} from "../../components/daily-demand";
 
 export const UserProfile = () => {
 
-    const [dailyNutrients, setdailyNutrients] = useState({
-        calories:0,
-        carbohydrates:0,
-        fat:0,
-        proteins:0
-    });
-    const [waterGlasses, setwaterGlasses] = useState(0);
-
-    const [userData, setUserData] = useState({
-        age: 0,
-        calories: 0,
-        carbohydrates: 0,
-        dataCompleted: true,
-        fat: 0,
-        freeTimeActivityLevel: '',
-        gender: '',
-        goal: '',
-        height: 0,
-        proteins: 0,
-        weight: 0,
-        workActivityLevel: ''
-    });
-
-    useEffect(() => {
-        getUserDailyCalories()
-            .then((res) => {
-                setdailyNutrients({
-                    calories: res.data.dailyNutrients.calories,
-                    carbohydrates: res.data.dailyNutrients.carbohydrates,
-                    fat: res.data.dailyNutrients.fat,
-                    proteins: res.data.dailyNutrients.proteins,
-                });
-                setwaterGlasses(res.data.waterGlasses);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        getUserData()
-            .then((res) => {
-                setUserData({
-                    age: res.data.age,
-                    calories: res.data.calories,
-                    carbohydrates: res.data.carbohydrates,
-                    dataCompleted: res.data.dataCompleted,
-                    fat: res.data.fat,
-                    freeTimeActivityLevel: res.data.freeTimeActivityLevel,
-                    gender: res.data.gender,
-                    goal: res.data.goal,
-                    height: res.data.height,
-                    proteins: res.data.proteins,
-                    weight: res.data.weight,
-                    workActivityLevel: res.data.workActivityLevel
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [userData.age]);
-
   return (
     <Container className='p-4'>
-        <UserForm/>
+        <Accordion>
+            <Card>
+                <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Wypełnij formularz celem przydzielenia idealnej diety
+                    </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                        <UserForm/>
+                    </Card.Body>
+                </Accordion.Collapse>
+            </Card>
+        </Accordion>
         <br/>
-        <h1>Twoje dzienne zapotrzebowanie</h1>
-      <Row>
-          <ProgressCircle
-              name='Kalorie'
-              actual={97.12}
-              dailyNutrients={userData.calories}
-              color={Color.blue}
-          />
-      </Row>
-        <br/>
-      <Row>
-          <ProgressCircle
-              name='Węglowodany'
-              actual={97.12}
-              dailyNutrients={userData.carbohydrates}
-              color={Color.red}
-          />
-      </Row><br/>
-      <Row>
-          <ProgressCircle
-              name='Tłuszcze'
-              actual={1}
-              dailyNutrients={userData.fat}
-              color={Color.gold}
-          />
-      </Row><br/>
-        <Row>
-            <ProgressCircle
-                name='Białka'
-                actual={97.12}
-                dailyNutrients={userData.proteins}
-                color={Color.orange}
-            />
-        </Row>
+        <DailyDemand/>
     </Container>
   );
 };

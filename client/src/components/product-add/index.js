@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { ProductTableRow } from '../product-table-row/ProductTableRow';
-import {addProduct, addProductToUserDailyCalories, getAllProducts, getAddProductInfo} from "../../helpers/apiCommands";
+import {addProduct, getAddProductInfo} from "../../helpers/apiCommands";
 import {Container, Col, Form, Button} from "react-bootstrap";
 
 export const ProductAdd = () => {
