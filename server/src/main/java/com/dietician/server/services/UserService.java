@@ -1,16 +1,17 @@
 package com.dietician.server.services;
 
 import com.dietician.server.db.entities.*;
-import com.dietician.server.db.enums.PortionUnit;
 import com.dietician.server.db.enums.UserRole;
 import com.dietician.server.db.repositories.FoodDiaryRepository;
-import com.dietician.server.db.repositories.NutrientsPerPortionRepository;
+import com.dietician.server.db.repositories.NutrientsPerDayRepository;
 import com.dietician.server.db.repositories.ProductRepository;
 import com.dietician.server.db.repositories.UserRepository;
+import com.dietician.server.dtos.responses.ProductResponse;
 import com.dietician.server.dtos.responses.UserDailyCaloriesSumResponse;
 import com.dietician.server.dtos.responses.UserGoalDataResponse;
 import com.dietician.server.utilities.converters.UserDailyCaloriesConverter;
 import com.dietician.server.utilities.converters.UserDataConverter;
+import com.dietician.server.utilities.converters.UserProductsConverter;
 import com.dietician.server.utilities.exceptions.FoodDiaryNotFoundException;
 import com.dietician.server.utilities.exceptions.ProductNotFoundException;
 import com.dietician.server.utilities.exceptions.UserDataNotFoundException;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -33,7 +35,8 @@ public class UserService implements UserDetailsService {
     private final UserDailyCaloriesConverter dailyCaloriesConverter;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final NutrientsPerPortionRepository nutrientsPerPortionRepository;
+    private final UserProductsConverter userProductsConverter;
+    private final NutrientsPerDayRepository nutrientsPerDayRepository;
     private final FoodDiaryRepository foodDiaryRepository;
 
     public Long registerUser(User user) {
@@ -72,26 +75,43 @@ public class UserService implements UserDetailsService {
             throw new UserDataNotFoundException();
         if (getFoodDiaryStreamByToday(user.getId())
                 .count() < 1) {
-            FoodDiary foodDiary = FoodDiary.builder()
-                    .date(OffsetDateTime.now())
-                    .nutrientsPerPortion(
-                            nutrientsPerPortionRepository.save(
-                                    NutrientsPerPortion.builder()
-                                            .calories(userGoalData.getCalories())
-                                            .carbohydrates(userGoalData.getCarbohydrates())
-                                            .fat(userGoalData.getFat())
-                                            .proteins(userGoalData.getProteins())
-                                            .unit(PortionUnit.GRAMS)
-                                            .build()
-                            )
-                    )
-                    .user(user)
-                    .build();
-            foodDiaryRepository.save(foodDiary);
+            createNewPositionInFoodDiary(user, userGoalData);
         }
         return dailyCaloriesConverter.convertToResponse(getFoodDiaryStreamByToday(user.getId())
                 .max(Comparator.comparing(FoodDiary::getDate))
                 .orElseThrow(FoodDiaryNotFoundException::new));
+    }
+
+    public List<ProductResponse> getDailyFoodDiary(String username) {
+        User user = getUserByUsername(username);
+        UserGoalData userGoalData = user.getUserGoal();
+        if (userGoalData == null)
+            throw new UserDataNotFoundException();
+        if (getFoodDiaryStreamByToday(user.getId()).count() < 1) {
+            createNewPositionInFoodDiary(user, userGoalData);
+        }
+        return getFoodDiaryStreamByToday(user.getId())
+                .filter(foodDiary -> foodDiary.getProduct() != null)
+                .map(userProductsConverter::convertToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private void createNewPositionInFoodDiary(User user, UserGoalData userGoalData) {
+        FoodDiary foodDiary = FoodDiary.builder()
+                .date(OffsetDateTime.now())
+                .nutrientsPerDay(
+                        nutrientsPerDayRepository.save(
+                                NutrientsPerDay.builder()
+                                        .calories(userGoalData.getCalories())
+                                        .carbohydrates(userGoalData.getCarbohydrates())
+                                        .fat(userGoalData.getFat())
+                                        .proteins(userGoalData.getProteins())
+                                        .build()
+                        )
+                )
+                .user(user)
+                .build();
+        foodDiaryRepository.save(foodDiary);
     }
 
     private Stream<FoodDiary> getFoodDiaryStreamByToday(Long userId) {
@@ -132,24 +152,23 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new ProductNotFoundException(productId));
         NutrientsPerPortion productNutrients = product.getStandardPortionNutrients();
         User user = getUserByUsername(username);
-        NutrientsPerPortion lastfoodDiary = getFoodDiaryStreamByToday(user.getId())
+        NutrientsPerDay lastfoodDiary = getFoodDiaryStreamByToday(user.getId())
                 .max(Comparator.comparing(FoodDiary::getDate))
-                .map(FoodDiary::getNutrientsPerPortion)
+                .map(FoodDiary::getNutrientsPerDay)
                 .orElseThrow(FoodDiaryNotFoundException::new);
-        NutrientsPerPortion foodDiaryPositionNutrients = NutrientsPerPortion.builder()
-                .portionSize(quantity)
+        NutrientsPerDay foodDiaryPositionNutrients = NutrientsPerDay.builder()
                 .calories(lastfoodDiary.getCalories() - ((productNutrients.getCalories() * quantity) / productNutrients.getPortionSize()))
-                .proteins(lastfoodDiary.getProteins() - ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize()))
-                .fat(lastfoodDiary.getFat() - ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize()))
-                .carbohydrates(lastfoodDiary.getCarbohydrates() - ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize()))
-                .unit(lastfoodDiary.getUnit())
+                .proteins((int) (lastfoodDiary.getProteins() - ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize())))
+                .fat((int) (lastfoodDiary.getFat() - ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize())))
+                .carbohydrates((int) (lastfoodDiary.getCarbohydrates() - ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize())))
                 .build();
-        nutrientsPerPortionRepository.save(foodDiaryPositionNutrients);
+        nutrientsPerDayRepository.save(foodDiaryPositionNutrients);
         FoodDiary foodDiary = FoodDiary.builder()
                 .user(user)
                 .date(OffsetDateTime.now())
                 .product(product)
-                .nutrientsPerPortion(foodDiaryPositionNutrients)
+                .nutrientsPerDay(foodDiaryPositionNutrients)
+                .productPortion(quantity)
                 .build();
         foodDiaryRepository.save(foodDiary);
     }

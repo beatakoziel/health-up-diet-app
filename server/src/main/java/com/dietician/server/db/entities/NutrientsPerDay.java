@@ -1,30 +1,33 @@
 package com.dietician.server.db.entities;
 
-import com.dietician.server.db.enums.Category;
+import com.dietician.server.db.enums.PortionUnit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class NutrientsPerDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    @Column(nullable = false)
+    private int calories;
 
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private Category category;
+    private int carbohydrates;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private NutrientsPerPortion standardPortionNutrients;
+    @Column(nullable = false)
+    private int proteins;
+
+    @Column(nullable = false)
+    private int fat;
 }

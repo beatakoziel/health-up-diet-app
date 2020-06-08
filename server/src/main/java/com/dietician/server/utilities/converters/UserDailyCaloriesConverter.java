@@ -1,6 +1,7 @@
 package com.dietician.server.utilities.converters;
 
 import com.dietician.server.db.entities.FoodDiary;
+import com.dietician.server.db.entities.NutrientsPerDay;
 import com.dietician.server.db.entities.NutrientsPerPortion;
 import com.dietician.server.dtos.responses.UserDailyCaloriesSumResponse;
 import com.dietician.server.dtos.responses.UserDailyNutrientsResponse;
@@ -12,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class UserDailyCaloriesConverter {
 
     public UserDailyCaloriesSumResponse convertToResponse(FoodDiary entity) {
-        NutrientsPerPortion nutrientsPerPortion = entity.getNutrientsPerPortion();
+        NutrientsPerDay nutrientsPerDay = entity.getNutrientsPerDay();
         UserDailyNutrientsResponse nutrientsPerPortionResponse = UserDailyNutrientsResponse.builder()
-                .calories(nutrientsPerPortion.getCalories())
-                .carbohydrates(nutrientsPerPortion.getCarbohydrates())
-                .fat(nutrientsPerPortion.getFat())
-                .proteins(nutrientsPerPortion.getProteins())
+                .calories(nutrientsPerDay.getCalories())
+                .carbohydrates(nutrientsPerDay.getCarbohydrates())
+                .fat(nutrientsPerDay.getFat())
+                .proteins(nutrientsPerDay.getProteins())
                 .build();
         return UserDailyCaloriesSumResponse.builder()
                 .dailyNutrients(nutrientsPerPortionResponse)

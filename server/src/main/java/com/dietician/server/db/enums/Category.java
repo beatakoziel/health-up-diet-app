@@ -22,7 +22,8 @@ public enum Category {
     VEGETABLES("Warzywa"),
     FISH("Ryby"),
     BAKING_PRODUCTS("Produkty do pieczenia"),
-    GRAIN_PRODUCTS("Produkty zbożowe");
+    GRAIN_PRODUCTS("Produkty zbożowe"),
+    BREAD("Pieczywo");
 
     @Getter
     private final String label;

@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class NutrientsPerPortionResponse {
     private Integer portionSize;
     private Integer calories;
-    private Integer carbohydrates;
-    private Integer fat;
-    private Integer proteins;
+    private Float carbohydrates;
+    private Float fat;
+    private Float proteins;
     private String unit;
 }

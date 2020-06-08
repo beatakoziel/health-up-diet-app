@@ -29,6 +29,8 @@ public class FoodDiary {
     @ManyToOne
     private Product product;
 
+    private int productPortion;
+
     @ManyToOne
-    private NutrientsPerPortion nutrientsPerPortion;
+    private NutrientsPerDay nutrientsPerDay;
 }
