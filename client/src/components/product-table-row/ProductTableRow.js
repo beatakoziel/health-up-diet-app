@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
-import {addProductToUserDailyCalories} from "../../helpers/apiCommands";
+import { addProductToUserDailyCalories } from '../../helpers/apiCommands';
 
 export const ProductTableRow = props => {
   const [quantity, setQuantity] = useState('');
@@ -25,20 +25,19 @@ export const ProductTableRow = props => {
   const showProductInf = () => {};
 
   const saveProduct = () => {
-     const postToApi = { productId, quantity };
-     console.log(postToApi);
+    const postToApi = { productId, quantity };
+    console.log(postToApi);
     addProductToUserDailyCalories(postToApi)
-        .then((res) => {
-          console.log("ok");
-
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .then(res => {
+        console.log('ok');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
-    <InputGroup className='mb-3'>
+    <InputGroup className='col'>
       <InputGroup.Prepend>
         <InputGroup.Text className='btn' onClick={showProductInf}>
           {name}
