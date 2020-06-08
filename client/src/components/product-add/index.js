@@ -15,7 +15,7 @@ const initProducts = {
 
 export const ProductAdd = () => {
 
-    const [products, setProducts] = useState({initProducts});
+    const [products, setProducts] = useState(initProducts);
 
     const [info, setInfo] = useState([]);
 
