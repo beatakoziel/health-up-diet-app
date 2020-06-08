@@ -26,6 +26,5 @@ public class Product {
     private Category category;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id", nullable = false)
     private NutrientsPerPortion standardPortionNutrients;
 }

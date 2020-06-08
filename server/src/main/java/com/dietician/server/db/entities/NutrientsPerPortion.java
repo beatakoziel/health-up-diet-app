@@ -25,13 +25,13 @@ public class NutrientsPerPortion {
     private int calories;
 
     @Column(nullable = false)
-    private int carbohydrates;
+    private float carbohydrates;
 
     @Column(nullable = false)
-    private int proteins;
+    private float proteins;
 
     @Column(nullable = false)
-    private int fat;
+    private float fat;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)

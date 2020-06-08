@@ -158,9 +158,9 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(FoodDiaryNotFoundException::new);
         NutrientsPerDay foodDiaryPositionNutrients = NutrientsPerDay.builder()
                 .calories(lastfoodDiary.getCalories() - ((productNutrients.getCalories() * quantity) / productNutrients.getPortionSize()))
-                .proteins(lastfoodDiary.getProteins() - ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize()))
-                .fat(lastfoodDiary.getFat() - ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize()))
-                .carbohydrates(lastfoodDiary.getCarbohydrates() - ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize()))
+                .proteins((int) (lastfoodDiary.getProteins() - ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize())))
+                .fat((int) (lastfoodDiary.getFat() - ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize())))
+                .carbohydrates((int) (lastfoodDiary.getCarbohydrates() - ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize())))
                 .build();
         nutrientsPerDayRepository.save(foodDiaryPositionNutrients);
         FoodDiary foodDiary = FoodDiary.builder()
