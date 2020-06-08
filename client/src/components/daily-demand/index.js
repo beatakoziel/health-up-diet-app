@@ -6,42 +6,41 @@ import { ProductTable } from '../../components/product-table/ProductTable';
 import {getUserDailyCalories, getUserData} from "../../helpers/apiCommands";
 import {ProductAdd} from "../../components/product-add";
 
+const initUserData = {
+    age: 0,
+    calories: 0,
+    carbohydrates: 0,
+    dataCompleted: true,
+    fat: 0,
+    freeTimeActivityLevel: '',
+    gender: '',
+    goal: '',
+    height: 0,
+    proteins: 0,
+    weight: 0,
+    workActivityLevel: ''
+};
+
+const initDailyNutrients = {
+    calories:0,
+    carbohydrates:0,
+    fat:0,
+    proteins:0
+};
+
 export const DailyDemand = () => {
 
-    const [dailyNutrients, setdailyNutrients] = useState({
-        calories:0,
-        carbohydrates:0,
-        fat:0,
-        proteins:0
-    });
+    const [dailyNutrients, setdailyNutrients] = useState(initDailyNutrients);
     const [waterGlasses, setwaterGlasses] = useState(0);
 
     const [noData, setNoData] = useState(false);
 
-    const [userData, setUserData] = useState({
-        age: 0,
-        calories: 0,
-        carbohydrates: 0,
-        dataCompleted: true,
-        fat: 0,
-        freeTimeActivityLevel: '',
-        gender: '',
-        goal: '',
-        height: 0,
-        proteins: 0,
-        weight: 0,
-        workActivityLevel: ''
-    });
+    const [userData, setUserData] = useState(initUserData);
 
     useEffect(() => {
         getUserDailyCalories()
             .then((res) => {
-                setdailyNutrients({
-                    calories: res.data.dailyNutrients.calories,
-                    carbohydrates: res.data.dailyNutrients.carbohydrates,
-                    fat: res.data.dailyNutrients.fat,
-                    proteins: res.data.dailyNutrients.proteins,
-                });
+                setdailyNutrients({...res.data.dailyNutrients})
                 setwaterGlasses(res.data.waterGlasses);
             })
             .catch((err) => {
@@ -51,20 +50,7 @@ export const DailyDemand = () => {
 
         getUserData()
             .then((res) => {
-                setUserData({
-                    age: res.data.age,
-                    calories: res.data.calories,
-                    carbohydrates: res.data.carbohydrates,
-                    dataCompleted: res.data.dataCompleted,
-                    fat: res.data.fat,
-                    freeTimeActivityLevel: res.data.freeTimeActivityLevel,
-                    gender: res.data.gender,
-                    goal: res.data.goal,
-                    height: res.data.height,
-                    proteins: res.data.proteins,
-                    weight: res.data.weight,
-                    workActivityLevel: res.data.workActivityLevel
-                });
+                setUserData({...res.data});
             })
             .catch((err) => {
                 console.log(err);

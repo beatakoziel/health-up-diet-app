@@ -2,18 +2,20 @@ import React, {useState, useEffect} from 'react';
 import {addProduct, getAddProductInfo} from "../../helpers/apiCommands";
 import {Container, Col, Form, Button} from "react-bootstrap";
 
+const initProducts = {
+    category: 'Makarony',
+    name: '',
+    calories: 0,
+    carbohydrates: 0,
+    fat: 0,
+    portionSize: 0,
+    proteins: 0,
+    unit: 'Gramy'
+};
+
 export const ProductAdd = () => {
 
-    const [products, setProducts] = useState({
-        category: 'Makarony',
-        name: '',
-        calories: 0,
-        carbohydrates: 0,
-        fat: 0,
-        portionSize: 0,
-        proteins: 0,
-        unit: 'Gramy'
-    });
+    const [products, setProducts] = useState({initProducts});
 
     const [info, setInfo] = useState([]);
 
@@ -32,14 +34,7 @@ export const ProductAdd = () => {
         const postBody = {
             category: products.category,
             name: products.name,
-            nutrientsPerPortion: {
-                calories: products.calories,
-                carbohydrates: products.carbohydrates,
-                fat: products.fat,
-                portionSize: products.portionSize,
-                proteins: products.proteins,
-                unit: products.unit
-            }
+            nutrientsPerPortion: {...products}
         };
         addProduct(postBody)
             .then((res) => {

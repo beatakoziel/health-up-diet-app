@@ -30,7 +30,6 @@ export const ProductTableRow = props => {
     addProductToUserDailyCalories(postToApi)
         .then((res) => {
           console.log("ok");
-          window.location.reload();
 
         })
         .catch((err) => {

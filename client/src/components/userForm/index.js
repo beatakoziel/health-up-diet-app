@@ -1,22 +1,27 @@
 import React from 'react';
-import { Button, Form, Col } from 'react-bootstrap';
+import {Button, Form, Col, FormControl} from 'react-bootstrap';
 import {getGoals, postGoals} from "../../helpers/apiCommands";
+import {MyInput} from "../inputs";
+
+const initUserForm = {
+    weight: '',
+    height: '',
+    age: '',
+    goal: 'Redukowanie',
+    gender: 'Mężczyzna',
+    workActivityLevel: 'Bardzo niski',
+    freeTimeActivityLevel: 'Bardzo niski'
+};
+
+const initLists = {
+    workoutActivityLevelList: [],
+    goalsList: [],
+    gendersList: [],
+    freeTimeActivityLevelList: [],
+};
 
 export class UserForm extends React.Component {
-    state = {
-        workoutActivityLevelList: [],
-        goalsList: [],
-        gendersList: [],
-        freeTimeActivityLevelList: [],
-        weight: '',
-        height: '',
-        age: '',
-        goal: 'Redukowanie',
-        gender: 'Mężczyzna',
-        workActivityLevel: 'Bardzo niski',
-        freeTimeActivityLevel: 'Bardzo niski',
-        dataCompleted: true
-    };
+    state = {initUserForm, initLists};
 
     componentDidMount = async () => {
         try {
@@ -39,7 +44,7 @@ export class UserForm extends React.Component {
     };
 
     sendUserForm = async () => {
-        const { weight, age, calories, carbohydrates, fat, gender, goal, height, proteins, workActivityLevel, freeTimeActivityLevel, dataCompleted } = this.state;
+        const { weight, age, gender, goal, height, workActivityLevel, freeTimeActivityLevel } = this.state;
         const bodyposts = {
             age: parseInt(age),
             freeTimeActivityLevel: freeTimeActivityLevel,
@@ -71,7 +76,7 @@ export class UserForm extends React.Component {
     };
 
     render() {
-        const { workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, height, goal, gender, age, weight } = this.state;
+        const {workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, height, goal, gender, age, weight } = this.state;
 
         return (
             <Col>
