@@ -1,36 +1,33 @@
 package com.dietician.server.db.entities;
 
+import com.dietician.server.db.enums.PortionUnit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Entity
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodDiary {
+public class NutrientsPerDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private OffsetDateTime date;
+    private int calories;
 
-    private int waterGlasses;
+    @Column(nullable = false)
+    private int carbohydrates;
 
-    @ManyToOne
-    private User user;
+    @Column(nullable = false)
+    private int proteins;
 
-    @ManyToOne
-    private Product product;
-
-    private int productPortion;
-
-    @ManyToOne
-    private NutrientsPerDay nutrientsPerDay;
+    @Column(nullable = false)
+    private int fat;
 }
