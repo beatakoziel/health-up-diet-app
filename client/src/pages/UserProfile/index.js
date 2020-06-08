@@ -1,18 +1,28 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import { LabelData } from '../../components/userProfile/labelData';
+import { Container, Accordion, Card, Button } from 'react-bootstrap';
 import {UserForm} from "../../components/userForm";
+import {DailyDemand} from "../../components/daily-demand";
 
 export const UserProfile = () => {
+
   return (
     <Container className='p-4'>
-        <UserForm/>
-      <Row>
-        <LabelData />
-      </Row>
-      <Row>ads</Row>
-      <Row>ads</Row>
-      <Row>ads</Row>
+        <Accordion>
+            <Card>
+                <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Wypełnij formularz celem przydzielenia idealnej diety
+                    </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                        <UserForm/>
+                    </Card.Body>
+                </Accordion.Collapse>
+            </Card>
+        </Accordion>
+        <br/>
+        <DailyDemand/>
     </Container>
   );
 };

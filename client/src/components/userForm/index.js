@@ -1,26 +1,27 @@
 import React from 'react';
-import { Button, Container, Form, Row, Col } from 'react-bootstrap';
+import {Button, Form, Col, FormControl} from 'react-bootstrap';
 import {getGoals, postGoals} from "../../helpers/apiCommands";
+import {MyInput} from "../inputs";
+
+const initUserForm = {
+    weight: '',
+    height: '',
+    age: '',
+    goal: 'Redukowanie',
+    gender: 'Mężczyzna',
+    workActivityLevel: 'Bardzo niski',
+    freeTimeActivityLevel: 'Bardzo niski'
+};
+
+const initLists = {
+    workoutActivityLevelList: [],
+    goalsList: [],
+    gendersList: [],
+    freeTimeActivityLevelList: [],
+};
 
 export class UserForm extends React.Component {
-    state = {
-        workoutActivityLevelList: [],
-        goalsList: [],
-        gendersList: [],
-        freeTimeActivityLevelList: [],
-        weight: '',
-        height: '',
-        age: '',
-        calories: '',
-        carbohydrates: '',
-        proteins: '',
-        fat: '',
-        goal: 'Redukowanie',
-        gender: 'Mężczyzna',
-        workActivityLevel: 'Bardzo niski',
-        freeTimeActivityLevel: 'Bardzo niski',
-        dataCompleted: true
-    };
+    state = {initUserForm, initLists};
 
     componentDidMount = async () => {
         try {
@@ -43,7 +44,7 @@ export class UserForm extends React.Component {
     };
 
     sendUserForm = async () => {
-        const { weight, age, calories, carbohydrates, fat, gender, goal, height, proteins, workActivityLevel, freeTimeActivityLevel, dataCompleted } = this.state;
+        const { weight, age, gender, goal, height, workActivityLevel, freeTimeActivityLevel } = this.state;
         const bodyposts = {
             age: parseInt(age),
             freeTimeActivityLevel: freeTimeActivityLevel,
@@ -56,13 +57,9 @@ export class UserForm extends React.Component {
         if (
             weight.length > 0 &&
             age.length > 0 &&
-            calories.length > 0 &&
-            carbohydrates.length > 0 &&
-            fat.length > 0 &&
             gender.length > 0 &&
             goal.length > 0 &&
             height.length > 0 &&
-            proteins.length > 0 &&
             workActivityLevel.length > 0 &&
             freeTimeActivityLevel.length > 0
         ) {
@@ -79,10 +76,10 @@ export class UserForm extends React.Component {
     };
 
     render() {
-        const { workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, proteins, height, goal, gender, fat, carbohydrates, calories, age, weight } = this.state;
+        const {workoutActivityLevelList, goalsList, gendersList, freeTimeActivityLevelList, freeTimeActivityLevel, workActivityLevel, height, goal, gender, age, weight } = this.state;
 
         return (
-            <Col className={"border border-success"}>
+            <Col>
 
                 <h1 className={"text-center"}>Proszę wypełnić formularz</h1>
 
@@ -109,38 +106,6 @@ export class UserForm extends React.Component {
                                 type='text'
                                 value={age}
                                 name='age'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio kalorie w ciągu dnia</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={calories}
-                                name='calories'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio węglowodany (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={carbohydrates}
-                                name='carbohydrates'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio białka (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={proteins}
-                                name='proteins'
-                                onChange={this.updateCredentials}
-                                placeholder=''
-                            />
-                            <Form.Label>Spożywane średnio tłuszcze (w gramach)</Form.Label>
-                            <Form.Control
-                                type='text'
-                                value={fat}
-                                name='fat'
                                 onChange={this.updateCredentials}
                                 placeholder=''
                             />
