@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { ProductTableRow } from '../product-table-row/ProductTableRow';
 import { ProductTableSearchBar } from '../product-table-search-bar/ProductTableSearchBar';
-import { Button } from 'react-bootstrap';
+import {Button, Container} from 'react-bootstrap';
 import { getAllProducts } from '../../helpers/apiCommands';
 import { MdDrafts } from 'react-icons/md';
+import {useOpenModal} from '../../pages/Demo/Demo';
+import {GenericModal} from "../Modal";
+import {ProductAdd} from "../product-add/ProductAdd";
+
+const initialModalState = {isModalOpen: false};
 
 export const ProductTable = () => {
   // TODO: Add hook with modal to add new product into db
+
+    const [state, openModal, closeModal] = useOpenModal();
+
 
   const [products, setProducts] = useState([]);
 
@@ -39,6 +47,7 @@ export const ProductTable = () => {
   // TODO: Open modal by click
   const handleClick = () => {
     // open modal to add product;
+      openModal()
   };
 
   return (
@@ -84,6 +93,11 @@ export const ProductTable = () => {
           </div>
         )}
       </div>
+        {state.isModalOpen === true && (
+            <GenericModal action={closeModal}>
+                <ProductAdd/>
+            </GenericModal>
+        )}
     </div>
   );
 };
