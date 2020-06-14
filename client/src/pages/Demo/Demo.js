@@ -1,41 +1,13 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
-import { Color } from '../../helpers/enums/Colors';
+import { Color } from '../../types/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import { GenericModal } from '../../components/Modal';
-
-const initialModalState = {isModalOpen: false};
-
-function reducer(state, action) {
-    switch (action.type) {
-        case 'OPEN_MODAL':
-            return {isModalOpen: true};
-        case 'CLOSE_MODAL':
-            return {isModalOpen: false};
-        default:
-            throw new Error();
-    }
-}
-
-export const useOpenModal = () => {
-
-    const [state, dispatch] = useReducer(reducer, initialModalState);
-
-    const openModal = () => {
-        dispatch({type: 'OPEN_MODAL'});
-    };
-    const closeModal = () => {
-        dispatch({type: 'CLOSE_MODAL'});
-    };
-
-    return [state, openModal,closeModal]
-
-};
+import { useOpenModal } from '../../hooks/useOpenModal';
 
 export const DemoPage = () => {
-
-    const [state, openModal, closeModal] = useOpenModal();
+  const [isModalOpen, openModal, closeModal] = useOpenModal();
 
   return (
     <Container>
@@ -52,14 +24,17 @@ export const DemoPage = () => {
         <h1>Product Table</h1>
         <ProductTable />
       </div>
-        <div>
-            <button onClick={openModal}>pokaż modal</button>
-        </div>
-        {state.isModalOpen === true && (
-            <GenericModal action={closeModal}>
-                <p>sadsad</p>
-            </GenericModal>
-        )}
+      <div>
+        <button onClick={openModal}>pokaż modal</button>
+      </div>
+
+      <GenericModal
+        action={closeModal}
+        isShow={isModalOpen}
+        handleClose={closeModal}
+      >
+        <p>modal test</p>
+      </GenericModal>
     </Container>
   );
 };

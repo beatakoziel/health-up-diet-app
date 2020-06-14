@@ -10,7 +10,7 @@ export const ProgressCircle = props => {
   };
 
   return (
-    <div className='row d-flex justify-content-md-center'>
+    <div className='row d-flex justify-content-md-center p-3'>
       <div className='col d-flex align-items-center justify-content-md-end'>
         <Progress
           strokeColor={color}

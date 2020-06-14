@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Alert, Button, Card, Container } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
-import { Color } from '../../helpers/enums/Colors';
+import { Color } from '../../types/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import { getUserDailyCalories, getUserData } from '../../helpers/apiCommands';
 import { ProductAdd } from '../product-add/ProductAdd';

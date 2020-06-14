@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import { addProductToUserDailyCalories } from '../../helpers/apiCommands';
+import { useOpenModal } from '../../hooks/useOpenModal';
+import { GenericModal } from '../Modal';
+import { ProductInf } from '../product-inf/ProductInf';
 
 export const ProductTableRow = props => {
   const [quantity, setQuantity] = useState('');
   const { productId, name, unit } = props;
+
+  const [isModalOpen, openModal, closeModal] = useOpenModal();
 
   const onChange = event => {
     setQuantity(event.target.value);
@@ -22,7 +27,9 @@ export const ProductTableRow = props => {
     }
   }, [quantity]);
 
-  const showProductInf = () => {};
+  const showProductInf = () => {
+    openModal();
+  };
 
   const saveProduct = () => {
     const postToApi = { productId, quantity };
@@ -37,20 +44,36 @@ export const ProductTableRow = props => {
   };
 
   return (
-    <InputGroup className='col'>
-      <InputGroup.Prepend>
-        <InputGroup.Text className='btn' onClick={showProductInf}>
-          {name}
-        </InputGroup.Text>
-      </InputGroup.Prepend>
-      <FormControl value={quantity} onChange={onChange} placeholder='0' />
-      <InputGroup.Append>
-        <InputGroup.Text>{unit}</InputGroup.Text>
-        <Button variant='outline-success' onClick={saveProduct}>
-          Zapisz
-        </Button>
-      </InputGroup.Append>
-    </InputGroup>
+    <React.Fragment>
+      <InputGroup className='col'>
+        <InputGroup.Prepend>
+          <InputGroup.Text
+            className='btn '
+            onClick={showProductInf}
+            style={{ width: '150px', fontSize: '12px' }}
+          >
+            {name}
+          </InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl value={quantity} onChange={onChange} placeholder='0' />
+        <InputGroup.Append>
+          <InputGroup.Text style={{ width: '60px', fontSize: '12px' }}>
+            {unit}
+          </InputGroup.Text>
+          <Button variant='outline-success' onClick={saveProduct}>
+            Zapisz
+          </Button>
+        </InputGroup.Append>
+      </InputGroup>
+
+      <GenericModal
+        isShow={isModalOpen}
+        action={closeModal}
+        handleClose={closeModal}
+      >
+        <ProductInf {...props} />
+      </GenericModal>
+    </React.Fragment>
   );
 };
 

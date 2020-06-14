@@ -4,14 +4,14 @@ import { ProductTableSearchBar } from '../product-table-search-bar/ProductTableS
 import { Button } from 'react-bootstrap';
 import { getAllProducts } from '../../helpers/apiCommands';
 import { MdDrafts } from 'react-icons/md';
-import { useOpenModal } from '../../pages/Demo/Demo';
 import { GenericModal } from '../Modal';
 import { ProductAdd } from '../product-add/ProductAdd';
+import { useOpenModal } from '../../hooks/useOpenModal';
 
 export const ProductTable = () => {
   // TODO: Add hook with modal to add new product into db
 
-  const [state, openModal, closeModal] = useOpenModal();
+  const [isModalOpen, openModal, closeModal] = useOpenModal();
 
   const [products, setProducts] = useState([]);
 
@@ -90,11 +90,14 @@ export const ProductTable = () => {
           </div>
         )}
       </div>
-      {state.isModalOpen === true && (
-        <GenericModal action={closeModal}>
-          <ProductAdd />
-        </GenericModal>
-      )}
+
+      <GenericModal
+        action={closeModal}
+        isShow={isModalOpen}
+        handleClose={closeModal}
+      >
+        <ProductAdd />
+      </GenericModal>
     </div>
   );
 };
