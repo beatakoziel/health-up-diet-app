@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { addProduct, getAddProductInfo } from '../../helpers/apiCommands';
-import { Container, Col, Form, Button } from 'react-bootstrap';
+import { Button, Col, Container, Form } from 'react-bootstrap';
 
 const initProducts = {
   category: 'Makarony',

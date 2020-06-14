@@ -30,6 +30,7 @@ const initDailyNutrients = {
 
 export const DailyDemand = () => {
   const [dailyNutrients, setdailyNutrients] = useState(initDailyNutrients);
+  // eslint-disable-next-line no-unused-vars
   const [waterGlasses, setwaterGlasses] = useState(0);
 
   const [noData, setNoData] = useState(false);

@@ -8,7 +8,7 @@ export const ProductTableSearchBar = ({ setFilter }) => {
 
   useEffect(() => {
     setFilter(buffer);
-  }, [buffer]);
+  }, [buffer, setFilter]);
 
   const onChange = e => {
     setBuffer(e.target.value);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Receipes.css';
-import { Col, Jumbotron, Row, Container } from 'react-bootstrap';
+import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
 import { receipes } from '../../data/ReceipesTemp';

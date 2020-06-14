@@ -1,5 +1,5 @@
-import { ButtonGroup, FormControl, InputGroup, ToggleButton } from "react-bootstrap"
-import React from "react"
+import { ButtonGroup, FormControl, InputGroup, ToggleButton } from 'react-bootstrap';
+import React from 'react';
 
 export const CalculateInput = ({title,name,placeholder,unit,setValues}) => (
   <InputGroup className="my-3">

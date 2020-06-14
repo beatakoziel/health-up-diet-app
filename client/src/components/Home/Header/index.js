@@ -1,13 +1,6 @@
 import * as React from 'react';
 import './Header.css';
-import {
-  Button,
-  Col,
-  FormControl,
-  InputGroup,
-  Jumbotron,
-  Row,
-} from 'react-bootstrap';
+import { Button, Col, FormControl, InputGroup, Jumbotron, Row } from 'react-bootstrap';
 import { IoIosSearch } from 'react-icons/io';
 import styled from 'styled-components';
 

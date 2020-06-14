@@ -1,10 +1,9 @@
-import React, {useReducer, useState, useEffect} from 'react';
-import { Container, Button } from 'react-bootstrap';
+import React, { useReducer } from 'react';
+import { Container } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
 import { Color } from '../../helpers/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
-import {GenericModal} from "../../components/Modal";
-import {ProductAdd} from "../../components/product-add/ProductAdd";
+import { GenericModal } from '../../components/Modal';
 
 const initialModalState = {isModalOpen: false};
 

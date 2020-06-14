@@ -5,7 +5,7 @@ import { addProductToUserDailyCalories } from '../../helpers/apiCommands';
 
 export const ProductTableRow = props => {
   const [quantity, setQuantity] = useState('');
-  const { productId, name, unit, category } = props;
+  const { productId, name, unit } = props;
 
   const onChange = event => {
     setQuantity(event.target.value);
@@ -28,7 +28,7 @@ export const ProductTableRow = props => {
     const postToApi = { productId, quantity };
     console.log(postToApi);
     addProductToUserDailyCalories(postToApi)
-      .then(res => {
+      .then(() => {
         console.log('ok');
       })
       .catch(err => {

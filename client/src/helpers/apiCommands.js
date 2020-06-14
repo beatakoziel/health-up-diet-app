@@ -1,5 +1,18 @@
-import {getSafe, post, postSafe} from './api';
-import {getGoalsApiUrl, loginApiUrl, loginApiUrlByFb, postGoalsApiUrl, registerApiUrl, userRoleApiUrl, getUserDailyCaloriesApiUrl, getUserDataApiUrl, postProductToUserDailyCaloriesApiUrl, getAllProductsApiUrl, postProductApiUrl, getAddProductInfoApiUrl} from './routes';
+import { getSafe, post, postSafe } from './api';
+import {
+  getAddProductInfoApiUrl,
+  getAllProductsApiUrl,
+  getGoalsApiUrl,
+  getUserDailyCaloriesApiUrl,
+  getUserDataApiUrl,
+  loginApiUrl,
+  loginApiUrlByFb,
+  postGoalsApiUrl,
+  postProductApiUrl,
+  postProductToUserDailyCaloriesApiUrl,
+  registerApiUrl,
+  userRoleApiUrl
+} from './routes';
 
 export const postCreateUser = body => post(registerApiUrl(), body);
 export const postLoginUser = body => post(loginApiUrl(), body);

@@ -1,7 +1,6 @@
 import React from 'react';
-import {Button, Form, Col, FormControl} from 'react-bootstrap';
-import {getGoals, postGoals} from "../../helpers/apiCommands";
-import {MyInput} from "../inputs";
+import { Button, Col, Form } from 'react-bootstrap';
+import { getGoals, postGoals } from '../../helpers/apiCommands';
 
 const initUserForm = {
     weight: '',

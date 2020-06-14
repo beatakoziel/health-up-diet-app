@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container, Accordion, Card, Button } from 'react-bootstrap';
-import {UserForm} from "../../components/userForm";
-import {DailyDemand} from "../../components/daily-demand";
+import { Accordion, Button, Card, Container } from 'react-bootstrap';
+import { UserForm } from '../../components/userForm';
+import { DailyDemand } from '../../components/daily-demand';
 
 export const UserProfile = () => {
 
