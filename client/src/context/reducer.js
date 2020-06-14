@@ -1,5 +1,5 @@
 import { LOGIN_ACTION, LOGOUT_ACTION } from './types';
-import { INITIAL_AUTH } from './index';
+import { INITIAL_CONTEXT } from './index';
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -8,7 +8,11 @@ export const reducer = (state, action) => {
       return { ...state, isAuthenticated: true, ...action.user };
     case LOGOUT_ACTION:
       localStorage.clear();
-      return INITIAL_AUTH;
+      return INITIAL_CONTEXT;
+    case 'OPEN_MODAL':
+      return {...state, isModalOpen: true};
+    case 'CLOSE_MODAL':
+      return {...state, isModalOpen: false};
     default:
       return state;
   }

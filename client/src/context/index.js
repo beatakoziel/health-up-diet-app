@@ -3,16 +3,17 @@ import { reducer } from './reducer';
 import { getAndCheckUserRole } from '../helpers/apiCommands';
 import { LOGIN_ACTION } from './types';
 
-export const INITIAL_AUTH = {
+export const INITIAL_CONTEXT = {
   jwt: '',
   isAuthenticated: false,
   userRole: '',
+  isModalOpen: false,
 };
 
-export const AuthorizationContext = createContext(INITIAL_AUTH);
+export const AuthorizationContext = createContext(INITIAL_CONTEXT);
 
 export const AuthorizationContextProvider = props => {
-  const [authData, dispatch] = useReducer(reducer, INITIAL_AUTH);
+  const [authData, dispatch] = useReducer(reducer, INITIAL_CONTEXT);
 
   useEffect(() => {
     getAndCheckUserRole()
