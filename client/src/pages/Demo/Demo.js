@@ -5,6 +5,7 @@ import { Color } from '../../types/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import { GenericModal } from '../../components/Modal';
 import { useOpenModal } from '../../hooks/useOpenModal';
+import {DailyProductsTable} from "../../components/daily-products-table/dailyTable";
 
 export const DemoPage = () => {
   const [isModalOpen, openModal, closeModal] = useOpenModal();
@@ -26,6 +27,10 @@ export const DemoPage = () => {
       </div>
       <div>
         <button onClick={openModal}>pokaż modal</button>
+      </div>
+      <div>
+          <h1>Daily Products</h1>
+          <DailyProductsTable/>
       </div>
 
       <GenericModal
