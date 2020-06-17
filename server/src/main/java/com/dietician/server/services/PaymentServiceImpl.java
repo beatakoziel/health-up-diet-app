@@ -3,7 +3,7 @@ package com.dietician.server.services;
 import com.dietician.server.db.entities.User;
 import com.dietician.server.db.enums.UserRole;
 import com.dietician.server.db.repositories.UserRepository;
-import com.dietician.server.dtos.PaymentDto;
+import com.dietician.server.dtos.requests.PaymentDto;
 import com.dietician.server.utilities.exceptions.UserNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.paypal.api.payments.*;
@@ -31,6 +31,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public ResponseEntity<String> createPayment(String username, PaymentDto paymentDto) throws JsonProcessingException, PayPalRESTException {
+
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Brak uzytkownika"));
+        if(user.getRole().equals(UserRole.USER_PREMIUM))
+            throw new PayPalRESTException("Użytkownik jest już premium");
 
         Transaction transaction = createTransaction(username, paymentDto);
 
@@ -72,6 +76,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
         if (result.getState().equals("approved")) {
             String username = result.getTransactions().get(0).getDescription();
+            System.out.println(username);
             changeUserRoleForPremium(username);
             return ResponseEntity.ok("Płatność została zrealizowana");
         }
