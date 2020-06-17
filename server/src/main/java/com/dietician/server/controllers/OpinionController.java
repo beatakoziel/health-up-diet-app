@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("opinions")
 @AllArgsConstructor
+@CrossOrigin
 public class OpinionController {
 
     private final OpinionService opinionService;
