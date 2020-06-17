@@ -3,7 +3,7 @@ import {
   getAddProductInfoApiUrl,
   getAllProductsApiUrl,
   getGoalsApiUrl,
-  getUserDailyCaloriesApiUrl,
+  getUserDailyCaloriesApiUrl, getUserDailyProductsApiUrl,
   getUserDataApiUrl,
   loginApiUrl,
   loginApiUrlByFb,
@@ -24,6 +24,7 @@ export const getGoals = () => getSafe(getGoalsApiUrl());
 export const postGoals = body => postSafe(postGoalsApiUrl(), body);
 export const getUserDailyCalories = () => getSafe(getUserDailyCaloriesApiUrl());
 export const getUserData = () => getSafe(getUserDataApiUrl());
+export const getUserDailyProducts = () => getSafe(getUserDailyProductsApiUrl());
 export const addProductToUserDailyCalories = body => postSafe(postProductToUserDailyCaloriesApiUrl(), body);
 
 export const getAllProducts = () => getSafe(getAllProductsApiUrl());
