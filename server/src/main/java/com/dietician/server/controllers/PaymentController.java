@@ -19,7 +19,6 @@ public class PaymentController {
     PaymentService paymentService;
 
     @PostMapping()
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> payment(Authentication authentication, @RequestBody PaymentDto paymentDto) throws PayPalRESTException, JsonProcessingException {
         return paymentService.createPayment(getUsernameFromAuthentication(authentication), paymentDto);
     }
