@@ -1,7 +1,7 @@
-import { LOGIN_ACTION, LOGOUT_ACTION } from './types';
-import { INITIAL_AUTH } from './index';
+import { INITIAL_AUTH } from '../context';
+import { LOGIN_ACTION, LOGOUT_ACTION } from '../types/action.types';
 
-export const reducer = (state, action) => {
+export const authReducer = (state, action) => {
   switch (action.type) {
     case LOGIN_ACTION:
       localStorage.setItem('@token', action.user.jwt);

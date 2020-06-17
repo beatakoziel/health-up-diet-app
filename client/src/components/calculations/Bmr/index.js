@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { Col, Container, Row } from "react-bootstrap"
-import styled from "styled-components"
-import { CalculateInput, CalculateOutput, SexCheckbox } from "../Input"
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import styled from 'styled-components';
+import { CalculateInput, CalculateOutput, SexCheckbox } from '../Input';
 
 export const BMR = () => {
   const [data, setData] = useState({ weight: 0, height: 0, age: 0 })

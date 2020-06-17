@@ -1,4 +1,4 @@
-package com.dietician.server.dtos;
+package com.dietician.server.dtos.requests;
 
 import lombok.Value;
 

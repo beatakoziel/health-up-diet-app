@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row, Container, Table, Form, Button } from 'react-bootstrap';
+import { Button, Container, Form, Row, Table } from 'react-bootstrap';
 import { ProductDiv } from '../../components/Product';
 import { products } from '../../data/ProductsTemp';
 
