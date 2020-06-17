@@ -32,11 +32,12 @@ export const ProductTableRow = props => {
   };
 
   const saveProduct = () => {
-    const postToApi = { productId, quantity };
+    const postToApi = { productId, quantity: Number(quantity) };
     console.log(postToApi);
     addProductToUserDailyCalories(postToApi)
       .then(() => {
         console.log('ok');
+        setQuantity('0');
       })
       .catch(err => {
         console.log(err);

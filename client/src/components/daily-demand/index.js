@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Alert, Button, Card, Container } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
 import { Color } from '../../types/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import { getUserDailyCalories, getUserData } from '../../helpers/apiCommands';
-import { ProductAdd } from '../product-add/ProductAdd';
+import { GenericModal } from '../Modal';
+import { useOpenModal } from '../../hooks/useOpenModal';
+import { UserForm } from '../userForm';
 
 const initUserData = {
   age: 0,
@@ -37,7 +39,22 @@ export const DailyDemand = () => {
 
   const [userData, setUserData] = useState(initUserData);
 
+  const [isModalOpen, openModal, closeModal] = useOpenModal();
+
+  const [error, setError] = useState(false);
+
   useEffect(() => {
+    getUserData()
+      .then(res => {
+        if (res.data.dataCompleted) setUserData({ ...res.data });
+        else {
+          setError(true);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     getUserDailyCalories()
       .then(res => {
         setdailyNutrients({ ...res.data.dailyNutrients });
@@ -47,15 +64,14 @@ export const DailyDemand = () => {
         console.log(err);
         setNoData(true);
       });
+  }, []);
 
-    getUserData()
-      .then(res => {
-        setUserData({ ...res.data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [userData.age]);
+  useEffect(() => {
+    if (error) {
+      openModal();
+      setError(false);
+    }
+  }, [error, openModal]);
 
   return (
     <Container>
@@ -109,22 +125,9 @@ export const DailyDemand = () => {
         <h1>Jak wygląda Twoja dzisiejsza dieta?</h1>
         <ProductTable />
       </div>
-      <div>
-        <Accordion>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Button} variant='link' eventKey='0'>
-                Dodaj produkt do bazy
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey='0'>
-              <Card.Body>
-                <ProductAdd />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
-      </div>
+      <GenericModal isShow={isModalOpen}>
+        <UserForm closeModal={closeModal} />
+      </GenericModal>
     </Container>
   );
 };
