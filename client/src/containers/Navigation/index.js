@@ -40,6 +40,7 @@ export const Navigation = () => {
           <HLink to='/diety'>Diety</HLink>
           <HLink to='/Kalkulator'>Kalkulator</HLink>
           <HLink to='/demo'>Demo</HLink>
+          <HLink to='/platnosc'>Konto premium</HLink>
         </Nav>
         {!authData.isAuthenticated ? (
           <Form inline>
