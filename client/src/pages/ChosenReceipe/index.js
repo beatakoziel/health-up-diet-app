@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
-import {getReceipeById} from "../../helpers/apiCommands";
-/*import { topinions } from '../../data/OpinionsTemp';*/
 import { receipes } from '../../data/ReceipesTemp';
 
 export class ChosenReceipe extends React.Component {
