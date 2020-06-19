@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, Container, Image,Col,Row } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { Carousel } from 'antd';
 import './PaymentPage.css';
-import Slid4 from '../../resources/img/slid4.jpg';
 import DollarCircleOutlined from "@ant-design/icons/es/icons/DollarCircleOutlined";
 
 export const PaymentPage = () => {
