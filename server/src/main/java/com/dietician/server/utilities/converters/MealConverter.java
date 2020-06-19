@@ -1,10 +1,12 @@
 package com.dietician.server.utilities.converters;
 
 import com.dietician.server.db.entities.Meal;
+import com.dietician.server.db.entities.Product;
 import com.dietician.server.db.entities.ProductsQuantitiesInMeal;
 import com.dietician.server.db.repositories.ProductRepository;
 import com.dietician.server.dtos.requests.MealRequest;
 import com.dietician.server.dtos.requests.ProductsQuantitiesInMealRequest;
+import com.dietician.server.dtos.responses.ProductListStructure;
 import com.dietician.server.dtos.responses.MealResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,10 +38,21 @@ public class MealConverter {
     }
 
     public MealResponse convertToResponse(Meal meal) {
+        List<ProductListStructure> listOfProducts = meal.getProducts().stream()
+                .map(this::convertMealsToProductListStructure)
+                .collect(Collectors.toList());
         return MealResponse.builder()
-                .id(meal.getId())
+                .mealId(meal.getId())
                 .name(meal.getName())
-                .products(meal.getProducts())
+                .products(listOfProducts)
+                .build();
+    }
+
+    private ProductListStructure convertMealsToProductListStructure(ProductsQuantitiesInMeal product){
+        return ProductListStructure.builder()
+                .name(product.getProduct().getName())
+                .unit(product.getProduct().getStandardPortionNutrients().getUnit())
+                .quantity(product.getQuantity())
                 .build();
     }
 }

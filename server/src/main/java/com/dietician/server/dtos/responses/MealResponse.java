@@ -1,6 +1,5 @@
 package com.dietician.server.dtos.responses;
 
-import com.dietician.server.db.entities.ProductsQuantitiesInMeal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MealResponse {
-    private Long id;
+    private Long mealId;
     private String name;
-    private List<ProductsQuantitiesInMeal> products;
+    private List<ProductListStructure> products;
 }
+
