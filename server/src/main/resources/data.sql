@@ -5,7 +5,7 @@ create table recipe
     id          bigint auto_increment
         primary key,
     description varchar(1000) not null,
-    image_url varchar(255) not null,
+    photo varchar(255) not null,
     name        varchar(255) not null
 )
     engine = MyISAM;
@@ -67,7 +67,7 @@ values (4, 'serek śmietabkowy almette', 100);
 replace into product_quantities_in_recipe(id, product_name, quantity)
 values (5, 'oliwa z oliwek', 10);
 
-replace into recipe(id, image_url, description, name)
+replace into recipe(id, photo, description, name)
 values(1, 'makaron_kurczak_szpinak.png','Wstaw wodę na makaron. Posól ją. W momencie kiedy woda się zagotuje wstaw makaron i gotuj przez około 10 minut. Przysmaż kurczaka na oliwie z oliwek wraz z przyprawami. Kiedy kurczak już będzie gotowy dodaj Almette oraz 1/4 szklanki wody. Dodaj kostki zamrożonego szpinaku. Całość wymieszaj do rozpuszczenia kostek szpinaku. Smacznego!', 'Kurczak w sosie szpinakowo-śmietanowym');
 
 replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)

@@ -13,7 +13,7 @@ public class RecipeConverter {
         return RecipeResponse.builder()
                 .id(recipe.getId())
                 .name(recipe.getName())
-                .imageUrl(recipe.getImageUrl())
+                .imageUrl(recipe.getPhoto())
                 .description(recipe.getDescription())
                 .productQuantityList(recipe.getProductQuantityList())
                 .build();

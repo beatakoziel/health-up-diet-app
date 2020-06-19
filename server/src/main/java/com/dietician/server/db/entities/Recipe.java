@@ -22,7 +22,7 @@ public class Recipe {
     private String name;
 
     @Column(nullable = false)
-    private String imageUrl;
+    private String photo;
 
     @Column(nullable = false)
     private String description;
