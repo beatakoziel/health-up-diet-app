@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { Button, Col, Container, Form, FormControl, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
-import { SingleOpinion } from '../../components/Opinion';
 import { receipes } from '../../data/ReceipesTemp';
-import { topinions } from '../../data/OpinionsTemp';
+/*import { topinions } from '../../data/OpinionsTemp';*/
 
 export class ChosenReceipe extends React.Component {
   state = {
     receipe: null,
-    opinion: null,
-    formcontent: '',
+/*    opinion: null,*/
+/*    formcontent: '',*/
   };
 
   componentDidMount = () => {
@@ -19,10 +18,10 @@ export class ChosenReceipe extends React.Component {
     );
     this.setState({ receipe: receipe });
 
-    const opinion = topinions.find(
+/*    const opinion = topinions.find(
       opinion => opinion.rid === Number(this.props.match.params.rid)
     );
-    this.setState({ opinion: opinion });
+    this.setState({ opinion: opinion });*/
   };
 
   updateCredentials = e => {
@@ -30,41 +29,36 @@ export class ChosenReceipe extends React.Component {
   };
 
   render() {
-    const { receipe, formcontent } = this.state;
+    const { receipe } = this.state;
     return (
       <Container className='p-2'>
-        {receipe && (
-          <Row className='flex-column shadow my-3'>
-            <ReceipeDiv
-              key={receipe.id}
-              id={receipe.id}
-              name={receipe.name}
-              photo={receipe.photo}
-              description={receipe.description}
-              disable={true}
-            />
-          </Row>
-        )}
-        {receipe && (
-          <Row className='flex-column shadow my-3'>
-            <h6>Przepis</h6>
-            <p>{receipe.preparing}</p>
-          </Row>
-        )}
-        {receipe && (
-          <Row className='flex-column shadow my-3'>
-            <h6>Wymagane składniki</h6>
-            <p>{receipe.ingredients}</p>
-          </Row>
-        )}
-        {receipe && (
-          <Row className='flex-column shadow my-3'>
-            <h6>średnia ocena</h6>
-            <h6>{receipe.mark}</h6>
-          </Row>
-        )}
-        <Row className='flex-column shadow my-3'>
-          <br />
+        <Row>
+          <Col>
+            {receipe && (
+                <Row className='flex-column'>
+                  <ReceipeDiv
+                      key={receipe.id}
+                      id={receipe.id}
+                      name={receipe.name}
+                      photo={receipe.photo}
+                      description={receipe.description}
+                      disable={true}
+                  />
+                </Row>
+            )}
+          </Col>
+            {receipe && (
+                <Col className='flex-column shadow my-3'>
+                  <h6>Przepis</h6>
+                  <p>{receipe.description}</p>
+                  <h6>Wymagane składniki</h6>
+                  {receipe.productQuantityList.map((n) =>
+                  <li>{n.productName} ({n.quantity} gram)</li>
+                  )}
+                </Col>
+            )}
+        </Row>
+{/*          <br />
           <h6>Dodaj opinie</h6>
           <Form>
             <Form.Group>
@@ -88,8 +82,8 @@ export class ChosenReceipe extends React.Component {
             <Button onClick={this.addOpinion} variant='primary' type='submit'>
               Wyślij
             </Button>
-          </Form>
-          <hr />
+          </Form>*/}
+{/*          <hr />
           <h6>Oceny użytkowników</h6>
           <br />
           <Col className=''>
@@ -108,8 +102,7 @@ export class ChosenReceipe extends React.Component {
                 <h3>Nie ma tu jeszcze opini</h3>
               </>
             )}
-          </Col>
-        </Row>
+          </Col>*/}
       </Container>
     );
   }

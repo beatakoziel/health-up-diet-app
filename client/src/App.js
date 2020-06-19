@@ -7,7 +7,6 @@ import { Navigation } from './containers/Navigation';
 import { DietPage } from './pages/DietPage';
 import { CalculatorPage } from './pages/CalculatorPage';
 import { ChosenReceipe } from './pages/ChosenReceipe';
-import { Products } from './pages/Products';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { AuthorizationContextProvider } from './context';
@@ -29,7 +28,6 @@ class App extends React.Component {
             <Route exact path='/kalkulator' component={CalculatorPage} />
             <Route exact path='/przepisy' component={Receipes} />
             <Route exact path='/przepisy/:id' component={ChosenReceipe} />
-            <Route exact path='/produkty' component={Products} />
             <Route exact path='/profil' component={UserProfile} />
             <Route exact path='/platnosc' component={PaymentPage} />
             <Route exact path='/demo' component={DemoPage} />
