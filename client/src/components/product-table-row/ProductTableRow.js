@@ -60,7 +60,7 @@ export const ProductTableRow = props => {
             console.log(err);
           });
       }
-      callback({ ...props });
+      callback({ ...props, quantity: Number(quantity) });
       setQuantity('0');
     }
   };

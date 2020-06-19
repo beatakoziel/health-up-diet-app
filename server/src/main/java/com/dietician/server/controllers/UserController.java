@@ -70,6 +70,12 @@ public class UserController {
                 request.getProductId(), request.getQuantity()));
     }
 
+    @DeleteMapping("/calories/{consumptionId}")
+    public ResponseEntity<Void> deleteProductFromUserDailyCalories(Authentication authentication, @PathVariable Long consumptionId) {
+        userService.deleteFoodDiaryPosition(getUsernameFromAuthentication(authentication),consumptionId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     private String getUsernameFromAuthentication(Authentication authentication) {
         return ((User) authentication.getPrincipal()).getUsername();
     }

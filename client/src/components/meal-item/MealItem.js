@@ -19,31 +19,33 @@ export const MealItem = ({ idMeal: mealId, name, products, deleteMeal }) => {
 
   return (
     <React.Fragment>
-      <Card
-        title={name}
-        extra={
-          <div>
-            <Button type='dashed' danger onClick={handleDeleteClick}>
-              Usuń
-            </Button>
-            <Button type='dashed' onClick={handleAddClick}>
-              Dodaj
-            </Button>
-          </div>
-        }
-        style={{ width: 300 }}
-      >
-        <List
-          size='small'
-          bordered
-          dataSource={products}
-          renderItem={product => (
-            <List.Item>
-              {product.name} {product.quantity} [{product.unit}]
-            </List.Item>
-          )}
-        />
-      </Card>
+      <div className='m-2'>
+        <Card
+          title={name}
+          extra={
+            <div>
+              <Button type='dashed' danger onClick={handleDeleteClick}>
+                Usuń
+              </Button>
+              <Button type='dashed' onClick={handleAddClick}>
+                Dodaj
+              </Button>
+            </div>
+          }
+          style={{ width: 300 }}
+        >
+          <List
+            size='small'
+            bordered
+            dataSource={products}
+            renderItem={product => (
+              <List.Item>
+                {product.name} {product.quantity} [{product.unit}]
+              </List.Item>
+            )}
+          />
+        </Card>
+      </div>
       <GenericModal isShow={isModalOpen} handleClose={closeModal}>
         <Alert
           message='Oznaczono'

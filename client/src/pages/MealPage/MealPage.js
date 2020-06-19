@@ -4,6 +4,7 @@ import { TableMode } from '../../types/enums/Colors';
 import { MealAdd } from '../../components/meal-add/MealAdd';
 import { MealList } from '../../components/meal-list/MealList';
 import { Divider } from 'antd';
+import { deleteMeal, getMeal } from '../../helpers/apiCommands';
 
 export const MealPage = () => {
   const [products, setProducts] = useState([]);
@@ -11,11 +12,15 @@ export const MealPage = () => {
 
   useEffect(() => {
     // GET FROM API MEALS
+    getMeal().then(res => {
+      setMeals(res.data);
+    });
   }, []);
 
-  const deleteMeal = mealId => {
-    //DELETE MEAL FROM API
-    setMeals(meals.filter(meal => meal.mealId !== mealId));
+  const handleDeleteMeal = mealId => {
+    deleteMeal(mealId)
+      .then(() => setMeals(meals.filter(meal => meal.mealId !== mealId)))
+      .catch(err => console.log(err));
   };
 
   const addMeal = meal => {
@@ -33,7 +38,7 @@ export const MealPage = () => {
   return (
     <div className='container shadow my-3'>
       <div className='row'>
-        <MealList meals={meals} deleteMeal={deleteMeal} />
+        <MealList meals={meals} deleteMeal={handleDeleteMeal} />
       </div>
       <Divider dashed={true} />
       <div className='row'>
