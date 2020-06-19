@@ -1,13 +1,19 @@
 package com.dietician.server.dtos.requests;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
+@Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductsQuantitiesInMealRequest {
     @NotNull
-    private final int quantity;
+    private int quantity;
 
-    private final Long productId;
+    private Long productId;
 }

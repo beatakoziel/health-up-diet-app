@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductsQuantitiesInMeal {
+public class ProductQuantitiesInRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +20,6 @@ public class ProductsQuantitiesInMeal {
     @Column(nullable = false)
     private int quantity;
 
-    @ManyToOne
-    private Product product;
+    @Column(nullable = false)
+    private String productName;
 }
