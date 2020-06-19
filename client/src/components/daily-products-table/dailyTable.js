@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
-import { getUserDailyProducts } from '../../helpers/apiCommands';
-import { MdDrafts } from 'react-icons/md';
 import { DailyProductsRow } from '../daily-products-row/dailyProductsRow';
 
-export const DailyProductsTable = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getUserDailyProducts()
-      .then(res => {
-        setProducts(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
+export const DailyProductsTable = ({ products }) => {
   return (
-    <div>
+    <div className='col p-3'>
       <h1>Tabela spożytych produktów</h1>
       <Table striped bordered hover className='border container'>
         <thead>
@@ -33,29 +19,21 @@ export const DailyProductsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {products.length > 0 ? (
-            products.map((product, id) => (
+          {products.length > 0 &&
+            products.map((product, key) => (
               <DailyProductsRow
-                key={id}
+                key={key}
                 productId={product.id}
                 name={product.name}
-                unit={product.nutrientsPerPortion.unit}
+                unit={product.unit}
                 category={product.category}
-                calories={product.nutrientsPerPortion.calories}
-                carbohydrates={product.nutrientsPerPortion.carbohydrates}
-                fat={product.nutrientsPerPortion.fat}
-                portionSize={product.nutrientsPerPortion.portionSize}
-                proteins={product.nutrientsPerPortion.proteins}
+                calories={product.calories}
+                carbohydrates={product.carbohydrates}
+                fat={product.fat}
+                portionSize={product.portionSize}
+                proteins={product.proteins}
               />
-            ))
-          ) : (
-            <div className='col'>
-              <h4>
-                Brak wyników
-                <MdDrafts />
-              </h4>
-            </div>
-          )}
+            ))}
         </tbody>
       </Table>
     </div>

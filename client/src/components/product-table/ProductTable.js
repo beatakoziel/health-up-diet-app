@@ -47,7 +47,7 @@ export const ProductTable = ({ mode, callback }) => {
   };
 
   return (
-    <div className='border container m-2 py-2'>
+    <div className='border container p-3'>
       <p>Wyszukaj: </p>
       <ProductTableSearchBar setFilter={setFilter} />
       <hr />
