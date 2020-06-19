@@ -1,26 +1,19 @@
-package com.dietician.server.db.entities;
+package com.dietician.server.dtos.responses;
 
+import com.dietician.server.db.entities.ProductsQuantitiesInMeal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MealResponse {
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductsQuantitiesInMeal> products;
 }
