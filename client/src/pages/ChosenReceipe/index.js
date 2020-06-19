@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { ReceipeDiv } from '../../components/Receipe';
 import {getReceipeById} from "../../helpers/apiCommands";
 /*import { topinions } from '../../data/OpinionsTemp';*/
+import { receipes } from '../../data/ReceipesTemp';
 
 export class ChosenReceipe extends React.Component {
   state = {
@@ -12,14 +13,11 @@ export class ChosenReceipe extends React.Component {
 /*    formcontent: '',*/
   };
 
-  componentDidMount = async () => {
-    try {
-      const result = await getReceipeById(this.props.match.params.id);
-      this.setState({ receipe: result });
-    } catch (e) {
-      const error = { message: 'Brak przepisu' };
-      this.setState({ error: error });
-    }
+  componentDidMount = () => {
+    const receipe = receipes.find(
+        receipe => receipe.id === Number(this.props.match.params.id)
+    );
+    this.setState({ receipe: receipe });
   };
 
   updateCredentials = e => {
