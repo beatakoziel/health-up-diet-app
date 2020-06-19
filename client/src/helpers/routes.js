@@ -19,3 +19,6 @@ export const postProductToUserDailyCaloriesApiUrl = () => `${serverUrl}/users/ca
 export const getAllProductsApiUrl = () => `${serverUrl}/products`;
 export const postProductApiUrl = () => `${serverUrl}/products`;
 export const getAddProductInfoApiUrl = () => `${serverUrl}/info`;
+
+export const getReceipesApiUrl = () => `${serverUrl}/recipes`;
+export const getRecipeByIdApiUrl = (id) => id ? `${serverUrl}/recipes/${id}` : `${serverUrl}/recipes`;

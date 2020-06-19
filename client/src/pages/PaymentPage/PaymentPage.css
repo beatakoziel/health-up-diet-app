@@ -1,0 +1,18 @@
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 500px;
+    line-height: 500px;
+    background-image: url("../../resources/img/slid3.jpg");
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+    color: black;
+    background-color: white;
+}
+
+.nap {
+    background-color: white;
+    width: 200px;
+    height: 100px;
+}

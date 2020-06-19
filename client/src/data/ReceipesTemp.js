@@ -13,6 +13,33 @@ export const receipes = [
         ingredients: '1 mała dynia Hokkaido (do 1 kg) 2 ziemniaki 2 marchewki 1 litr bulionu (wcześniej ugotowanego, ewentualnie z kostki rosołowej) 1 mała cebula sok z połowy cytryny ½ łyżeczki zmielonego imbiru w proszku (lub świeżego, tylko to już do smaku, bo świeży imbir jest bardziej intensywny) sól, pieprz, gałka muszkatołowa, cukier trochę słodkiej śmietany 30- 36% (dodaję ok. 100ml)',
         preparing: 'Dynię umyć, przekroić na pół, oczyścić z pestek i włókien. Następnie pokroić w kostkę razem ze skórką. Ziemniaki i marchewki umyć, obrać i pokroić w kostkę. Cebulę obrać i pokroić w kostkę. Dynię, ziemniaki, marchewki i cebulę ugotować na bulionie do miękkości. Zupę zmiksować np. blenderem na krem. Doprawić sokiem z cytryny, imbirem, solą, pieprzem, gałką muszkatołową i szczyptą cukru. Dodać śmietanę. (Można ją dodać podczas miksowania lub dolać do zupy rozlanej na talerzach).',
         description: 'Zdrowy i smaczny posiłek',
+        productQuantityList: [
+            {
+                id: 1,
+                quantity: 300,
+                productName: 'makaron tagliatelle'
+            },
+            {
+                id: 2,
+                quantity: 200,
+                productName: 'pierś z kurczaka'
+            },
+            {
+                id: 3,
+                quantity: 50,
+                productName: 'szpinak mrożony'
+            },
+            {
+                id: 4,
+                quantity: 100,
+                productName: 'serek śmietabkowy almette'
+            },
+            {
+                id: 5,
+                quantity: 10,
+                productName: 'oliwa z oliwek'
+            }
+        ],
     },
     {
         id: 2,
@@ -33,6 +60,33 @@ export const receipes = [
             '      \'6. Sosem polać kalafiora. Piec w 200 stopniach ok 15 min.\\n\' +\n' +
             '      \'7. W połowie pieczenia posypać zapiekankę płatkami migdałów.',
         description: 'zdrowe, wiele węglowodanów',
+        productQuantityList: [
+            {
+                id: 1,
+                quantity: 300,
+                productName: 'makaron tagliatelle'
+            },
+            {
+                id: 2,
+                quantity: 200,
+                productName: 'pierś z kurczaka'
+            },
+            {
+                id: 3,
+                quantity: 50,
+                productName: 'szpinak mrożony'
+            },
+            {
+                id: 4,
+                quantity: 100,
+                productName: 'serek śmietabkowy almette'
+            },
+            {
+                id: 5,
+                quantity: 10,
+                productName: 'oliwa z oliwek'
+            }
+        ],
     },
     {
         id: 3,
@@ -51,6 +105,33 @@ export const receipes = [
             '      \'Układam kwiatki bratka na sałatce.\\n\' +\n' +
             '      \'3. Mieszam składniki potrzebne do sosu miodowego i polewam sałatkę .',
         description: 'dużo witamin z grupy D',
+        productQuantityList: [
+            {
+                id: 1,
+                quantity: 300,
+                productName: 'makaron tagliatelle'
+            },
+            {
+                id: 2,
+                quantity: 200,
+                productName: 'pierś z kurczaka'
+            },
+            {
+                id: 3,
+                quantity: 50,
+                productName: 'szpinak mrożony'
+            },
+            {
+                id: 4,
+                quantity: 100,
+                productName: 'serek śmietabkowy almette'
+            },
+            {
+                id: 5,
+                quantity: 10,
+                productName: 'oliwa z oliwek'
+            }
+        ],
     },
     {
         id: 4,
@@ -72,6 +153,33 @@ export const receipes = [
             '      \'Za pomocą pędzelka posmarować mlekiem i posypać dowolnie: makiem, sezamem lub słonecznikiem.\\n\' +\n' +
             '      \'Włożyć do rozgrzanego piekarnika i piec około 20-25 min (termoobieg) w temp. 160 stopni do zarumienienia.',
         description: 'pożywne i smaczne',
+        productQuantityList: [
+            {
+                id: 1,
+                quantity: 300,
+                productName: 'makaron tagliatelle'
+            },
+            {
+                id: 2,
+                quantity: 200,
+                productName: 'pierś z kurczaka'
+            },
+            {
+                id: 3,
+                quantity: 50,
+                productName: 'szpinak mrożony'
+            },
+            {
+                id: 4,
+                quantity: 100,
+                productName: 'serek śmietabkowy almette'
+            },
+            {
+                id: 5,
+                quantity: 10,
+                productName: 'oliwa z oliwek'
+            }
+        ],
     },
     {
         id: 5,
@@ -104,5 +212,32 @@ export const receipes = [
             '            \'Pieczemy 20-25 minut w 190 stopniach.\\n\' +\n' +
             '            \'Podajemy z ulubionymi sosami.',
         description: 'pożywne i smaczne',
+        productQuantityList: [
+            {
+                id: 1,
+                quantity: 300,
+                productName: 'makaron tagliatelle'
+            },
+            {
+                id: 2,
+                quantity: 200,
+                productName: 'pierś z kurczaka'
+            },
+            {
+                id: 3,
+                quantity: 50,
+                productName: 'szpinak mrożony'
+            },
+            {
+                id: 4,
+                quantity: 100,
+                productName: 'serek śmietabkowy almette'
+            },
+            {
+                id: 5,
+                quantity: 10,
+                productName: 'oliwa z oliwek'
+            }
+        ],
     },
 ]

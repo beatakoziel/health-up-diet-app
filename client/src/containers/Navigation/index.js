@@ -36,7 +36,6 @@ export const Navigation = () => {
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto' defaultActiveKey='/'>
           <HLink to='/przepisy'>Przepisy</HLink>
-          <HLink to='/produkty'>Produkty</HLink>
           <HLink to='/diety'>Diety</HLink>
           <HLink to='/Kalkulator'>Kalkulator</HLink>
           <HLink to='/demo'>Demo</HLink>
