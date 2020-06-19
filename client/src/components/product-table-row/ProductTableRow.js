@@ -46,7 +46,7 @@ export const ProductTableRow = props => {
   };
 
   const saveProduct = () => {
-    if (quantity.length <= 0) {
+    if (quantity.length <= 0 || quantity === '0') {
       openNotification();
     } else {
       if (mode === TableMode.DailyDemand) {
@@ -55,15 +55,13 @@ export const ProductTableRow = props => {
         addProductToUserDailyCalories(postToApi)
           .then(() => {
             console.log('ok');
-            setQuantity('0');
           })
           .catch(err => {
             console.log(err);
           });
-      } else {
-        callback({ productId, name, quantity, unit });
-        setQuantity('0');
       }
+      callback({ ...props });
+      setQuantity('0');
     }
   };
 
