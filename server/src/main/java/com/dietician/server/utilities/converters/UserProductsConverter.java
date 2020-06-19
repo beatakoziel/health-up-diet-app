@@ -2,7 +2,6 @@ package com.dietician.server.utilities.converters;
 
 import com.dietician.server.db.entities.FoodDiary;
 import com.dietician.server.db.entities.NutrientsPerPortion;
-import com.dietician.server.db.entities.Product;
 import com.dietician.server.dtos.responses.NutrientsPerPortionResponse;
 import com.dietician.server.dtos.responses.ProductResponse;
 import lombok.AllArgsConstructor;

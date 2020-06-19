@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "health_up_user")
@@ -35,6 +36,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Meal> meals;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private UserGoalData userGoal;
