@@ -73,6 +73,10 @@ export const DailyDemand = () => {
     }
   }, [error, openModal]);
 
+  const transformProportion = (dailyNutrients, actual) => {
+    return Math.abs(dailyNutrients - actual);
+  };
+
   return (
     <Container>
       {noData && (
@@ -86,7 +90,7 @@ export const DailyDemand = () => {
         <br />
         <ProgressCircle
           name='Kalorie'
-          actual={dailyNutrients.calories}
+          actual={transformProportion(userData.calories, dailyNutrients.calories)}
           dailyNutrients={userData.calories}
           color={Color.blue}
         />
@@ -95,7 +99,10 @@ export const DailyDemand = () => {
       <div>
         <ProgressCircle
           name='Węglowodany'
-          actual={dailyNutrients.carbohydrates}
+          actual={transformProportion(
+            userData.carbohydrates,
+            dailyNutrients.carbohydrates
+          )}
           dailyNutrients={userData.carbohydrates}
           color={Color.red}
         />
@@ -104,7 +111,7 @@ export const DailyDemand = () => {
       <div>
         <ProgressCircle
           name='Tłuszcze'
-          actual={dailyNutrients.fat}
+          actual={transformProportion(userData.fat, dailyNutrients.fat)}
           dailyNutrients={userData.fat}
           color={Color.gold}
         />
@@ -113,7 +120,7 @@ export const DailyDemand = () => {
       <div>
         <ProgressCircle
           name='Białka'
-          actual={dailyNutrients.proteins}
+          actual={transformProportion(userData.proteins, dailyNutrients.proteins)}
           dailyNutrients={userData.proteins}
           color={Color.orange}
         />

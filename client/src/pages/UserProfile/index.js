@@ -2,6 +2,7 @@ import React from 'react';
 import { Accordion, Button, Card, Container } from 'react-bootstrap';
 import { UserForm } from '../../components/userForm';
 import { DailyDemand } from '../../components/daily-demand';
+import { DailyProductsTable } from '../../components/daily-products-table/dailyTable';
 
 
 // TODO DELETE
@@ -24,6 +25,8 @@ export const UserProfile = () => {
       </Accordion>
       <br />
       <DailyDemand />
+      <br />
+      <DailyProductsTable />
     </Container>
   );
 };
