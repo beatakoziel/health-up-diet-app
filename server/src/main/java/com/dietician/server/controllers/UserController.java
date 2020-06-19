@@ -68,10 +68,9 @@ public class UserController {
     }
 
     @PostMapping("/calories")
-    public ResponseEntity<Void> addProductToUserDailyCalories(Authentication authentication, @RequestBody @Valid ProductToCaloriesRequest request) {
-        userService.addProductToUserDailyCalories(getUsernameFromAuthentication(authentication),
-                request.getProductId(), request.getQuantity());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Long> addProductToUserDailyCalories(Authentication authentication, @RequestBody @Valid ProductToCaloriesRequest request) {
+        return ResponseEntity.ok(userService.addProductToUserDailyCalories(getUsernameFromAuthentication(authentication),
+                request.getProductId(), request.getQuantity()));
     }
 
     private String getUsernameFromAuthentication(Authentication authentication) {

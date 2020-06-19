@@ -24,7 +24,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{paymentId}/{PayerID}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> successPay(@PathVariable("paymentId") String paymentId, @PathVariable("PayerID") String payerId) throws PayPalRESTException, JsonProcessingException {
         return paymentService.executePayment(paymentId, payerId);
     }

@@ -147,7 +147,7 @@ public class UserService implements UserDetailsService {
         return getUserByUsername(username).getRole().toString();
     }
 
-    public void addProductToUserDailyCalories(String username, Long productId, int quantity) {
+    public Long addProductToUserDailyCalories(String username, Long productId, int quantity) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
         NutrientsPerPortion productNutrients = product.getStandardPortionNutrients();
@@ -170,7 +170,7 @@ public class UserService implements UserDetailsService {
                 .nutrientsPerDay(foodDiaryPositionNutrients)
                 .productPortion(quantity)
                 .build();
-        foodDiaryRepository.save(foodDiary);
+        return foodDiaryRepository.save(foodDiary).getId();
     }
 
 }
