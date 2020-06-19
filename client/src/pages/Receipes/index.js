@@ -4,24 +4,15 @@ import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
 import {getRecipes} from "../../helpers/apiCommands";
+import { receipes } from '../../data/ReceipesTemp';
 
 export class Receipes extends React.Component {
   state = {
-    receipes: [],
+    receipes: null,
   };
 
-/*  componentDidMount = () => {
-    this.setState({ receipes: receipes }); //GET FROM API
-  };*/
-
-  componentDidMount = async () => {
-    try {
-      const result = await getRecipes();
-      this.setState({ receipes: result });
-    } catch (e) {
-      const error = { message: 'Brak przepisow' };
-      this.setState({ error: error });
-    }
+  componentDidMount = () => {
+    this.setState({ receipes: receipes });
   };
 
   render() {
