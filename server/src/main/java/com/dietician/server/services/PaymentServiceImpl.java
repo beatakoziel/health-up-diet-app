@@ -64,6 +64,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public ResponseEntity<String> executePayment(String paymentId, String payerId) throws PayPalRESTException, JsonProcessingException {
+        System.out.println("TUTAJ");
         Payment payment = new Payment();
         payment.setId(paymentId);
         PaymentExecution paymentExecute = new PaymentExecution();

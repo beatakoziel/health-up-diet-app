@@ -6,6 +6,7 @@ import com.dietician.server.db.repositories.FoodDiaryRepository;
 import com.dietician.server.db.repositories.NutrientsPerDayRepository;
 import com.dietician.server.db.repositories.ProductRepository;
 import com.dietician.server.db.repositories.UserRepository;
+import com.dietician.server.dtos.responses.ConsumptionProductResponse;
 import com.dietician.server.dtos.responses.ProductResponse;
 import com.dietician.server.dtos.responses.UserDailyCaloriesSumResponse;
 import com.dietician.server.dtos.responses.UserGoalDataResponse;
@@ -82,7 +83,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(FoodDiaryNotFoundException::new));
     }
 
-    public List<ProductResponse> getDailyFoodDiary(String username) {
+    public List<ConsumptionProductResponse> getDailyFoodDiary(String username) {
         User user = getUserByUsername(username);
         UserGoalData userGoalData = user.getUserGoal();
         if (userGoalData == null)
@@ -92,7 +93,7 @@ public class UserService implements UserDetailsService {
         }
         return getFoodDiaryStreamByToday(user.getId())
                 .filter(foodDiary -> foodDiary.getProduct() != null)
-                .map(userProductsConverter::convertToResponse)
+                .map(userProductsConverter::convertToConsumption)
                 .collect(Collectors.toList());
     }
 
@@ -147,7 +148,7 @@ public class UserService implements UserDetailsService {
         return getUserByUsername(username).getRole().toString();
     }
 
-    public void addProductToUserDailyCalories(String username, Long productId, int quantity) {
+    public Long addProductToUserDailyCalories(String username, Long productId, int quantity) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
         NutrientsPerPortion productNutrients = product.getStandardPortionNutrients();
@@ -170,7 +171,7 @@ public class UserService implements UserDetailsService {
                 .nutrientsPerDay(foodDiaryPositionNutrients)
                 .productPortion(quantity)
                 .build();
-        foodDiaryRepository.save(foodDiary);
+        return foodDiaryRepository.save(foodDiary).getId();
     }
 
 }
