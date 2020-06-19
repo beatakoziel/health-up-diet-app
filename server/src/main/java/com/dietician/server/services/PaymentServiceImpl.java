@@ -33,7 +33,7 @@ public class PaymentServiceImpl implements PaymentService {
     public ResponseEntity<String> createPayment(String username, PaymentDto paymentDto) throws JsonProcessingException, PayPalRESTException {
         System.out.println("CREATE PAYMENT");
         User user = userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Brak uzytkownika"));
-        if(user.getRole().equals(UserRole.USER_PREMIUM))
+        if (user.getRole().equals(UserRole.USER_PREMIUM))
             throw new PayPalRESTException("Użytkownik jest już premium");
 
         Transaction transaction = createTransaction(username, paymentDto);

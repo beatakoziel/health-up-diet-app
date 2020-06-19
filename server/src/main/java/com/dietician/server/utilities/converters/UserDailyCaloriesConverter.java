@@ -2,7 +2,6 @@ package com.dietician.server.utilities.converters;
 
 import com.dietician.server.db.entities.FoodDiary;
 import com.dietician.server.db.entities.NutrientsPerDay;
-import com.dietician.server.db.entities.NutrientsPerPortion;
 import com.dietician.server.dtos.responses.UserDailyCaloriesSumResponse;
 import com.dietician.server.dtos.responses.UserDailyNutrientsResponse;
 import lombok.AllArgsConstructor;
