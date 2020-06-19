@@ -67,6 +67,7 @@ export const Navigation = () => {
               id='dropdown-item-button'
             >
               <Vlink to='/profil'>Mój profil</Vlink>
+              <Vlink to='/posilki'>Moje posiłki</Vlink>
 
               <NavDropdown.Divider />
               <NavDropdown.Item

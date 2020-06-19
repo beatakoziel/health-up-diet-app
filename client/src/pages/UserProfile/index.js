@@ -5,8 +5,9 @@ import { DailyDemand } from '../../components/daily-demand';
 import { DailyProductsTable } from '../../components/daily-products-table/dailyTable';
 
 
-// TODO DELETE
 export const UserProfile = () => {
+
+
   return (
     <Container className='p-4'>
       <Accordion>

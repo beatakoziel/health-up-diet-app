@@ -14,6 +14,7 @@ import { AuthorizationContextProvider } from './context';
 import { UserProfile } from './pages/UserProfile';
 import { DemoPage } from './pages/Demo/Demo';
 import { PaymentPage } from './pages/PaymentPage/PaymentPage';
+import { MealPage } from './pages/MealPage/MealPage';
 
 class App extends React.Component {
   render() {
@@ -32,6 +33,7 @@ class App extends React.Component {
             <Route exact path='/produkty' component={Products} />
             <Route exact path='/profil' component={UserProfile} />
             <Route exact path='/platnosc' component={PaymentPage} />
+            <Route exact path='/posilki' component={MealPage} />
             <Route exact path='/demo' component={DemoPage} />
           </Switch>
         </Router>

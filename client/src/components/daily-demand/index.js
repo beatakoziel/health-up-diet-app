@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Container } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
-import { Color } from '../../types/enums/Colors';
+import { Color, TableMode } from '../../types/enums/Colors';
 import { ProductTable } from '../../components/product-table/ProductTable';
 import { getUserDailyCalories, getUserData } from '../../helpers/apiCommands';
 import { GenericModal } from '../Modal';
@@ -130,7 +130,10 @@ export const DailyDemand = () => {
         <br />
         <br />
         <h1>Jak wygląda Twoja dzisiejsza dieta?</h1>
-        <ProductTable />
+        <ProductTable
+          mode={TableMode.DailyDemand}
+          callback={() => console.log('ERROR')}
+        />
       </div>
       <GenericModal isShow={isModalOpen}>
         <UserForm closeModal={closeModal} />
