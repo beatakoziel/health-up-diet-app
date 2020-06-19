@@ -21,3 +21,4 @@ export const postProductApiUrl = () => `${serverUrl}/products`;
 export const getAddProductInfoApiUrl = () => `${serverUrl}/info`;
 
 export const getReceipesApiUrl = () => `${serverUrl}/recipes`;
+export const getRecipeByIdApiUrl = (id) => id ? `${serverUrl}/recipes/${id}` : `${serverUrl}/recipes`;

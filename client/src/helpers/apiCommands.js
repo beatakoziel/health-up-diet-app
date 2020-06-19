@@ -2,7 +2,7 @@ import { getSafe, post, postSafe } from './api';
 import {
   getAddProductInfoApiUrl,
   getAllProductsApiUrl,
-  getGoalsApiUrl, getReceipesApiUrl,
+  getGoalsApiUrl, getReceipesApiUrl, getRecipeByIdApiUrl,
   getUserDailyCaloriesApiUrl, getUserDailyProductsApiUrl,
   getUserDataApiUrl,
   loginApiUrl,
@@ -32,3 +32,4 @@ export const addProduct = body => postSafe(postProductApiUrl(), body);
 export const getAddProductInfo = () => getSafe(getAddProductInfoApiUrl());
 
 export const getRecipes = () => getSafe(getReceipesApiUrl());
+export const getReceipeById = (id) => getSafe(getRecipeByIdApiUrl(id));

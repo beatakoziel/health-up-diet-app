@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
-import { receipes } from '../../data/ReceipesTemp';
+import {getReceipeById} from "../../helpers/apiCommands";
 /*import { topinions } from '../../data/OpinionsTemp';*/
 
 export class ChosenReceipe extends React.Component {
@@ -12,16 +12,14 @@ export class ChosenReceipe extends React.Component {
 /*    formcontent: '',*/
   };
 
-  componentDidMount = () => {
-    const receipe = receipes.find(
-      receipe => receipe.id === Number(this.props.match.params.id)
-    );
-    this.setState({ receipe: receipe });
-
-/*    const opinion = topinions.find(
-      opinion => opinion.rid === Number(this.props.match.params.rid)
-    );
-    this.setState({ opinion: opinion });*/
+  componentDidMount = async () => {
+    try {
+      const result = await getReceipeById(this.props.match.params.id);
+      this.setState({ receipe: result });
+    } catch (e) {
+      const error = { message: 'Brak przepisu' };
+      this.setState({ error: error });
+    }
   };
 
   updateCredentials = e => {
