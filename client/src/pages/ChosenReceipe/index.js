@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row, Col, Container, Form, FormControl, Button } from 'react-bootstrap';
+import { Button, Col, Container, Form, FormControl, Row } from 'react-bootstrap';
 
 import { ReceipeDiv } from '../../components/Receipe';
 import { SingleOpinion } from '../../components/Opinion';

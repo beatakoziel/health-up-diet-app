@@ -3,8 +3,8 @@ import FacebookLogin from 'react-facebook-login';
 import { Col } from 'react-bootstrap';
 import { postLoginUserByFb } from '../../helpers/apiCommands';
 import { AuthorizationContext } from '../../context';
-import { LOGIN_ACTION } from '../../context/types';
 import { useHistory } from 'react-router-dom';
+import { LOGIN_ACTION } from '../../types/action.types';
 
 export const Facebook = () => {
   const { dispatch } = useContext(AuthorizationContext);

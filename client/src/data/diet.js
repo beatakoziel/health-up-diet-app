@@ -1,8 +1,8 @@
-import DiabeticDiet from "../resources/img/diet/diabeticDiet.png"
-import MontignacaDiet from "../resources/img/diet/montignacaDiet.jpg"
-import SoupDiet from "../resources/img/diet/soupDiet.jpeg"
-import SiboDiet from "../resources/img/diet/siboDiet.jpg"
-import FruitDiet from "../resources/img/diet/fruitDiet.jpeg"
+import DiabeticDiet from '../resources/img/diet/diabeticDiet.png';
+import MontignacaDiet from '../resources/img/diet/montignacaDiet.jpg';
+import SoupDiet from '../resources/img/diet/soupDiet.jpeg';
+import SiboDiet from '../resources/img/diet/siboDiet.jpg';
+import FruitDiet from '../resources/img/diet/fruitDiet.jpeg';
 
 
 export const diets = [

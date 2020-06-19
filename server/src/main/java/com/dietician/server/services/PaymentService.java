@@ -1,6 +1,6 @@
 package com.dietician.server.services;
 
-import com.dietician.server.dtos.PaymentDto;
+import com.dietician.server.dtos.requests.PaymentDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.http.ResponseEntity;

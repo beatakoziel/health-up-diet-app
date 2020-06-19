@@ -6,9 +6,9 @@ import { MdAccountCircle, MdLock } from 'react-icons/md';
 import { CredentialsWrapper } from '../SignUp';
 import { postLoginUser } from '../../helpers/apiCommands';
 import { AuthorizationContext } from '../../context';
-import { LOGIN_ACTION } from '../../context/types';
 import { useHistory } from 'react-router-dom';
 import { Facebook } from '../../containers/Facebook';
+import { LOGIN_ACTION } from '../../types/action.types';
 
 const initialState = {
   email: '',

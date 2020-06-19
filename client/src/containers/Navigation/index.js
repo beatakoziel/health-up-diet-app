@@ -3,8 +3,8 @@ import { Button, Form, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthorizationContext } from '../../context';
-import { LOGOUT_ACTION } from '../../context/types';
 import UserLogo from '../../resources/img/user.png';
+import { LOGOUT_ACTION } from '../../types/action.types';
 
 const UserImage = <Image src={UserLogo} width='40px' height='40px' />;
 
@@ -39,6 +39,7 @@ export const Navigation = () => {
           <HLink to='/produkty'>Produkty</HLink>
           <HLink to='/diety'>Diety</HLink>
           <HLink to='/Kalkulator'>Kalkulator</HLink>
+          <HLink to='/demo'>Demo</HLink>
         </Nav>
         {!authData.isAuthenticated ? (
           <Form inline>

@@ -12,6 +12,7 @@ import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { AuthorizationContextProvider } from './context';
 import { UserProfile } from './pages/UserProfile';
+import { DemoPage } from './pages/Demo/Demo';
 
 class App extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route exact path='/przepisy/:id' component={ChosenReceipe} />
             <Route exact path='/produkty' component={Products} />
             <Route exact path='/profil' component={UserProfile} />
+            <Route exact path='/demo' component={DemoPage} />
           </Switch>
         </Router>
       </AuthorizationContextProvider>
