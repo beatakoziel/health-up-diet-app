@@ -97,6 +97,31 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteFoodDiaryPosition(String username, Long consumptionId) {
+        User user = getUserByUsername(username);
+        FoodDiary foodDiary = foodDiaryRepository.findById(consumptionId)
+                .orElseThrow(FoodDiaryNotFoundException::new);
+        foodDiaryRepository.delete(foodDiary);
+        NutrientsPerPortion productNutrients = foodDiary.getProduct().getStandardPortionNutrients();
+        int quantity = foodDiary.getProductPortion();
+        NutrientsPerDay nutrientsPerDay = foodDiary.getNutrientsPerDay();
+        NutrientsPerDay foodDiaryPositionNutrients = NutrientsPerDay.builder()
+                .calories(nutrientsPerDay.getCalories() + ((productNutrients.getCalories() * quantity) / productNutrients.getPortionSize()))
+                .proteins((int) (nutrientsPerDay.getProteins() + ((productNutrients.getProteins() * quantity) / productNutrients.getPortionSize())))
+                .fat((int) (nutrientsPerDay.getFat() + ((productNutrients.getFat() * quantity) / productNutrients.getPortionSize())))
+                .carbohydrates((int) (nutrientsPerDay.getCarbohydrates() + ((productNutrients.getCarbohydrates() * quantity) / productNutrients.getPortionSize())))
+                .build();
+        nutrientsPerDayRepository.save(foodDiaryPositionNutrients);
+        FoodDiary newFoodDiaryPosition = FoodDiary.builder()
+                .user(user)
+                .date(OffsetDateTime.now())
+                .product(null)
+                .nutrientsPerDay(foodDiaryPositionNutrients)
+                .productPortion(quantity)
+                .build();
+         foodDiaryRepository.save(newFoodDiaryPosition);
+    }
+
     private void createNewPositionInFoodDiary(User user, UserGoalData userGoalData) {
         FoodDiary foodDiary = FoodDiary.builder()
                 .date(OffsetDateTime.now())
