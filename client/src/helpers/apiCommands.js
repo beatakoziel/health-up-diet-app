@@ -11,6 +11,8 @@ import {
   loginApiUrl,
   loginApiUrlByFb,
   mealApiUrl,
+  payAcceptApiUrl,
+  payUrl,
   postGoalsApiUrl,
   postProductApiUrl,
   postProductToUserDailyCaloriesApiUrl,
@@ -42,3 +44,7 @@ export const getReceipeById = id => getSafe(getRecipeByIdApiUrl(id));
 export const postMeal = body => postSafe(mealApiUrl(), body);
 export const getMeal = () => getSafe(mealApiUrl());
 export const deleteMeal = id => deleteSafe(mealApiUrl(id));
+
+export const postPay = body => postSafe(payUrl(), body);
+export const acceptPay = (paymentId, PayerID) =>
+  getSafe(payAcceptApiUrl(paymentId, PayerID));

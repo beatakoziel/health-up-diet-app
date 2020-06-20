@@ -27,3 +27,7 @@ export const getRecipeByIdApiUrl = id =>
 
 export const mealApiUrl = id =>
   id ? `${serverUrl}/meals/${id}` : `${serverUrl}/meals`;
+
+export const payUrl = () => `${serverUrl}/pay`;
+export const payAcceptApiUrl = (paymentId, PayerID) =>
+  `${serverUrl}/pay/${paymentId}/${PayerID}`;

@@ -14,6 +14,7 @@ import { UserProfile } from './pages/UserProfile';
 import { DemoPage } from './pages/Demo/Demo';
 import { PaymentPage } from './pages/PaymentPage/PaymentPage';
 import { MealPage } from './pages/MealPage/MealPage';
+import { PaymentSuccess } from './containers/Payments/PaymentSuccess';
 
 class App extends React.Component {
   render() {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route exact path='/platnosc' component={PaymentPage} />
             <Route exact path='/posilki' component={MealPage} />
             <Route exact path='/demo' component={DemoPage} />
+            <Route exact path='/pay/accept' component={PaymentSuccess} />
           </Switch>
         </Router>
       </AuthorizationContextProvider>
