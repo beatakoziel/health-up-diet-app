@@ -48,5 +48,4 @@ public class GlobalExceptionHandler {
         return sendExceptionMessage(ex, HttpStatus.BAD_REQUEST, req.getRequestURL().toString());
     }
 
-
 }

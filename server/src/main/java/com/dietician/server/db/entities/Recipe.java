@@ -29,7 +29,4 @@ public class Recipe {
 
     @OneToMany
     private List<ProductQuantitiesInRecipe> productQuantityList;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Opinion> opinions;
 }
