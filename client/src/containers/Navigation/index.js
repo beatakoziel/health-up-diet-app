@@ -35,10 +35,14 @@ export const Navigation = () => {
       <Navbar.Toggle aria-controls='responsive-nav-bar' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto' defaultActiveKey='/'>
-          <HLink to='/przepisy'>Przepisy</HLink>
-          <HLink to='/diety'>Diety</HLink>
+          {authData.userRole === 'USER_PREMIUM' && (
+            <React.Fragment>
+              <HLink to='/przepisy'>Przepisy</HLink>
+              <HLink to='/diety'>Diety</HLink>
+            </React.Fragment>
+          )}
           <HLink to='/Kalkulator'>Kalkulator</HLink>
-          <HLink to='/demo'>Demo</HLink>
+          {/*<HLink to='/demo'>Demo</HLink>*/}
           <HLink to='/platnosc'>Konto premium</HLink>
         </Nav>
         {!authData.isAuthenticated ? (
