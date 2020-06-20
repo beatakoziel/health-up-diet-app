@@ -4,7 +4,12 @@ import { Button, Input, List } from 'antd';
 import { notification } from 'antd';
 import { postMeal } from '../../helpers/apiCommands';
 
-export const MealAdd = ({ products, addMeal, deleteProducts }) => {
+export const MealAdd = ({
+  products,
+  addMeal,
+  deleteProducts,
+  deleteAllProducts,
+}) => {
   const [name, setName] = useState('');
 
   const openNotification = () => {
@@ -33,9 +38,11 @@ export const MealAdd = ({ products, addMeal, deleteProducts }) => {
     // POST TO API
     if (name.length > 0 && products.length > 0) {
       console.log(products);
-      postMeal({ name, products }).then(res =>
-        addMeal({ mealId: res.data, name, products })
-      );
+      postMeal({ name, products }).then(res => {
+        addMeal({ mealId: res.data, name, products });
+        deleteAllProducts();
+        setName('');
+      });
     } else {
       openNotification();
     }

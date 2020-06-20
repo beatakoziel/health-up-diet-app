@@ -35,6 +35,10 @@ export const MealPage = () => {
     setProducts(products.filter(product => product.productId !== productId));
   };
 
+  const deleteAllProducts = () => {
+    setProducts([]);
+  };
+
   return (
     <div className='container shadow my-3'>
       <div className='row'>
@@ -46,6 +50,7 @@ export const MealPage = () => {
           products={products}
           addMeal={addMeal}
           deleteProducts={deleteProducts}
+          deleteAllProducts={deleteAllProducts}
         />
         <div className='col'>
           <ProductTable mode={TableMode.Meal} callback={addProduct} />
