@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("pay")
 @AllArgsConstructor
+@CrossOrigin
 public class PaymentController {
 
     PaymentService paymentService;
@@ -24,7 +25,6 @@ public class PaymentController {
     }
 
     @GetMapping("/{paymentId}/{PayerID}")
-    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> successPay(@PathVariable("paymentId") String paymentId, @PathVariable("PayerID") String payerId) throws PayPalRESTException, JsonProcessingException {
         return paymentService.executePayment(paymentId, payerId);
     }

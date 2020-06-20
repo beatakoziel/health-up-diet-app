@@ -1,8 +1,11 @@
 package com.dietician.server.dtos.requests;
 
-import lombok.Value;
+import lombok.*;
 
-@Value
+@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentDto {
     private String totalPrice;
 }
