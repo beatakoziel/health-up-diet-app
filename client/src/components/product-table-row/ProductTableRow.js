@@ -5,10 +5,12 @@ import { addProductToUserDailyCalories } from '../../helpers/apiCommands';
 import { useOpenModal } from '../../hooks/useOpenModal';
 import { GenericModal } from '../Modal';
 import { ProductInf } from '../product-inf/ProductInf';
+import { TableMode } from '../../types/enums/Colors';
+import { notification } from 'antd';
 
 export const ProductTableRow = props => {
   const [quantity, setQuantity] = useState('');
-  const { productId, name, unit } = props;
+  const { productId, name, unit, mode, callback } = props;
 
   const [isModalOpen, openModal, closeModal] = useOpenModal();
 
@@ -31,17 +33,36 @@ export const ProductTableRow = props => {
     openModal();
   };
 
+  const openNotification = () => {
+    notification.warning({
+      key: 'one',
+      message: 'Wystąpił błąd',
+      description: `Zapomniałeś dodać ilość dla ${name}.`,
+      style: {
+        width: 600,
+        marginLeft: 335 - 600,
+      },
+    });
+  };
+
   const saveProduct = () => {
-    const postToApi = { productId, quantity: Number(quantity) };
-    console.log(postToApi);
-    addProductToUserDailyCalories(postToApi)
-      .then(() => {
-        console.log('ok');
-        setQuantity('0');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (quantity.length <= 0 || quantity === '0') {
+      openNotification();
+    } else {
+      if (mode === TableMode.DailyDemand) {
+        const postToApi = { productId, quantity: Number(quantity) };
+        console.log(postToApi);
+        addProductToUserDailyCalories(postToApi)
+          .then(() => {
+            console.log('ok');
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+      callback({ ...props, quantity: Number(quantity) });
+      setQuantity('0');
+    }
   };
 
   return (
@@ -79,6 +100,8 @@ export const ProductTableRow = props => {
 };
 
 ProductTableRow.propTypes = {
+  callback: PropTypes.func,
+  mode: PropTypes.any,
   productId: PropTypes.number.isRequired, //id
   name: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,

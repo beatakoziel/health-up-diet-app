@@ -11,3 +11,8 @@ export const Color = {
   geekblue: 'geekblue',
   purple: 'purple',
 };
+
+export const TableMode = {
+  DailyDemand: 0,
+  Meal: 1,
+};

@@ -7,12 +7,14 @@ import { Navigation } from './containers/Navigation';
 import { DietPage } from './pages/DietPage';
 import { CalculatorPage } from './pages/CalculatorPage';
 import { ChosenReceipe } from './pages/ChosenReceipe';
-import { Products } from './pages/Products';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { AuthorizationContextProvider } from './context';
 import { UserProfile } from './pages/UserProfile';
 import { DemoPage } from './pages/Demo/Demo';
+import { PaymentPage } from './pages/PaymentPage/PaymentPage';
+import { MealPage } from './pages/MealPage/MealPage';
+import { PaymentSuccess } from './containers/Payments/PaymentSuccess';
 
 class App extends React.Component {
   render() {
@@ -28,9 +30,11 @@ class App extends React.Component {
             <Route exact path='/kalkulator' component={CalculatorPage} />
             <Route exact path='/przepisy' component={Receipes} />
             <Route exact path='/przepisy/:id' component={ChosenReceipe} />
-            <Route exact path='/produkty' component={Products} />
             <Route exact path='/profil' component={UserProfile} />
+            <Route exact path='/platnosc' component={PaymentPage} />
+            <Route exact path='/posilki' component={MealPage} />
             <Route exact path='/demo' component={DemoPage} />
+            <Route exact path='/pay/accept' component={PaymentSuccess} />
           </Switch>
         </Router>
       </AuthorizationContextProvider>

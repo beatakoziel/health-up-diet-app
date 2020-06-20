@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Container } from 'react-bootstrap';
+import { Alert, Col } from 'react-bootstrap';
 import { ProgressCircle } from '../../components/progress-circle/ProgressCircle';
 import { Color } from '../../types/enums/Colors';
-import { ProductTable } from '../../components/product-table/ProductTable';
 import { getUserDailyCalories, getUserData } from '../../helpers/apiCommands';
 import { GenericModal } from '../Modal';
 import { useOpenModal } from '../../hooks/useOpenModal';
@@ -30,7 +29,7 @@ const initDailyNutrients = {
   proteins: 0,
 };
 
-export const DailyDemand = () => {
+export const DailyDemand = ({ products }) => {
   const [dailyNutrients, setdailyNutrients] = useState(initDailyNutrients);
   // eslint-disable-next-line no-unused-vars
   const [waterGlasses, setwaterGlasses] = useState(0);
@@ -64,7 +63,7 @@ export const DailyDemand = () => {
         console.log(err);
         setNoData(true);
       });
-  }, []);
+  }, [products]);
 
   useEffect(() => {
     if (error) {
@@ -73,61 +72,62 @@ export const DailyDemand = () => {
     }
   }, [error, openModal]);
 
+  const transformProportion = (dailyNutrients, actual) => {
+    return Math.abs(dailyNutrients - actual);
+  };
+
   return (
-    <Container>
+    <div className='row d-flex flex-column'>
       {noData && (
-        <Alert variant='danger'>
-          <h3>Najpierw wypełnij formularz</h3>
-        </Alert>
+        <Col>
+          <Alert variant='danger'>
+            <h3>Najpierw wypełnij formularz</h3>
+          </Alert>
+        </Col>
       )}
-      <div>
-        <br />
+      <div className='col'>
         <h1>Twoje dzienne zapotrzebowanie</h1>
-        <br />
+
         <ProgressCircle
           name='Kalorie'
-          actual={dailyNutrients.calories}
+          actual={transformProportion(userData.calories, dailyNutrients.calories)}
           dailyNutrients={userData.calories}
           color={Color.blue}
         />
       </div>
-      <br />
-      <div>
+
+      <div className='col'>
         <ProgressCircle
           name='Węglowodany'
-          actual={dailyNutrients.carbohydrates}
+          actual={transformProportion(
+            userData.carbohydrates,
+            dailyNutrients.carbohydrates
+          )}
           dailyNutrients={userData.carbohydrates}
           color={Color.red}
         />
       </div>
-      <br />
-      <div>
+
+      <div className='col'>
         <ProgressCircle
           name='Tłuszcze'
-          actual={dailyNutrients.fat}
+          actual={transformProportion(userData.fat, dailyNutrients.fat)}
           dailyNutrients={userData.fat}
           color={Color.gold}
         />
       </div>
-      <br />
-      <div>
+
+      <div className='col'>
         <ProgressCircle
           name='Białka'
-          actual={dailyNutrients.proteins}
+          actual={transformProportion(userData.proteins, dailyNutrients.proteins)}
           dailyNutrients={userData.proteins}
           color={Color.orange}
         />
       </div>
-      <div>
-        <br />
-        <br />
-        <br />
-        <h1>Jak wygląda Twoja dzisiejsza dieta?</h1>
-        <ProductTable />
-      </div>
       <GenericModal isShow={isModalOpen}>
         <UserForm closeModal={closeModal} />
       </GenericModal>
-    </Container>
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './Receipes.css';
 import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
-
 import { ReceipeDiv } from '../../components/Receipe';
 import { receipes } from '../../data/ReceipesTemp';
 
@@ -11,7 +10,7 @@ export class Receipes extends React.Component {
   };
 
   componentDidMount = () => {
-    this.setState({ receipes: receipes }); //GET FROM API
+    this.setState({ receipes: receipes });
   };
 
   render() {
@@ -26,7 +25,7 @@ export class Receipes extends React.Component {
             </Col>
           </Row>
         </Jumbotron>
-        <Row>
+        <Row sm={1} md={2} xl={4}>
           {receipes &&
             receipes.map(receipe => (
               <ReceipeDiv
@@ -35,6 +34,7 @@ export class Receipes extends React.Component {
                 name={receipe.name}
                 photo={receipe.photo}
                 description={receipe.description}
+                productQuantityList={receipe.productQuantityList}
               />
             ))}
         </Row>

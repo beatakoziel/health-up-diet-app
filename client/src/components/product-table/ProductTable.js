@@ -8,9 +8,8 @@ import { GenericModal } from '../Modal';
 import { ProductAdd } from '../product-add/ProductAdd';
 import { useOpenModal } from '../../hooks/useOpenModal';
 
-export const ProductTable = () => {
+export const ProductTable = ({ mode, callback }) => {
   // TODO: Add hook with modal to add new product into db
-
   const [isModalOpen, openModal, closeModal] = useOpenModal();
 
   const [products, setProducts] = useState([]);
@@ -48,7 +47,7 @@ export const ProductTable = () => {
   };
 
   return (
-    <div className='border container'>
+    <div className='border container p-3'>
       <p>Wyszukaj: </p>
       <ProductTableSearchBar setFilter={setFilter} />
       <hr />
@@ -69,6 +68,8 @@ export const ProductTable = () => {
         {active.length > 0 ? (
           active.map((product, id) => (
             <ProductTableRow
+              callback={callback}
+              mode={mode}
               key={id}
               productId={product.id}
               name={product.name}

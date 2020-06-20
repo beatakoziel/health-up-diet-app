@@ -1,19 +1,5 @@
-
-drop table recipe;
-create table recipe
-(
-    id          bigint auto_increment
-        primary key,
-    description varchar(1000) not null,
-    photo varchar(255) not null,
-    name        varchar(255) not null
-)
-    engine = MyISAM;
---INIT USER--
 replace into health_up_user(id, blocked, email, password, role)
 values (1, false, 'admin@admin.com', '$2y$12$b5LIwLw1C39dptntq1atSu/A2YhCXYWxiPLou/yT5DgKtVaYji3TG', 'ADMIN');
-
---INIT PRODUCTS--
 replace into nutrients_per_portion(id, calories, carbohydrates, fat, portion_size, proteins, unit)
 values (1, 98, 0, 1.3, 100, 21.5, 'GRAMS');
 replace into product(id, category, name, standard_portion_nutrients_id)
@@ -54,29 +40,3 @@ replace into nutrients_per_portion(id, calories, carbohydrates, fat, portion_siz
 values (10, 60, 6.2, 2, 100, 4.3, 'GRAMS');
 replace into product(id, category, name, standard_portion_nutrients_id)
 values (10, 'GRAIN_PRODUCTS', 'Jogurt naturalny', 10);
-
---INIT RECIPES--
-replace into product_quantities_in_recipe(id, product_name, quantity)
-values (1, 'makaron tagliatelle', 300);
-replace into product_quantities_in_recipe(id, product_name, quantity)
-values (2, 'pierś z kurczaka', 200);
-replace into product_quantities_in_recipe(id, product_name, quantity)
-values (3, 'szpinak mrożony', 50);
-replace into product_quantities_in_recipe(id, product_name, quantity)
-values (4, 'serek śmietabkowy almette', 100);
-replace into product_quantities_in_recipe(id, product_name, quantity)
-values (5, 'oliwa z oliwek', 10);
-
-replace into recipe(id, photo, description, name)
-values(1, 'makaron_kurczak_szpinak.png','Wstaw wodę na makaron. Posól ją. W momencie kiedy woda się zagotuje wstaw makaron i gotuj przez około 10 minut. Przysmaż kurczaka na oliwie z oliwek wraz z przyprawami. Kiedy kurczak już będzie gotowy dodaj Almette oraz 1/4 szklanki wody. Dodaj kostki zamrożonego szpinaku. Całość wymieszaj do rozpuszczenia kostek szpinaku. Smacznego!', 'Kurczak w sosie szpinakowo-śmietanowym');
-
-replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)
-values(1, 1);
-replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)
-values(1, 2);
-replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)
-values(1, 3);
-replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)
-values(1, 4);
-replace into recipe_product_quantity_list(recipe_id, product_quantity_list_id)
-values(1, 5);
